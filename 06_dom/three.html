@@ -2,25 +2,55 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chai aur code </title>
+    <title>DOM — Creating Elements</title>
 </head>
-<body style="background-color: #212121; color: #fff;">
-    
+<body style="background-color: #212121; color: #fff; font-family: system-ui, sans-serif; padding: 20px;">
+
 </body>
 <script>
-    const div = document.createElement('div')
-    console.log(div);
-    div.className = "main"
-    div.id = Math.round(Math.random() * 10 + 1)
-    div.setAttribute("title", "generated title")
-    div.style.backgroundColor = "green"
-    div.style.padding = "12px"
-    // div.innerText = "Chai aur code"
-    const addText = document.createTextNode("Chai aur code")
-    div.appendChild(addText)
+    // ============================================
+    // 📌 Creating DOM Elements — Modern JS
+    // ============================================
 
-    document.body.appendChild(div)
+    // 🔹 Create a new element
+    const div = document.createElement('div');
+
+    // 🔹 Set attributes & styles
+    div.className = "main";
+    div.id = `element-${crypto.randomUUID().slice(0, 8)}`; // ✅ Modern: crypto.randomUUID()
+    div.setAttribute("title", "Generated element");
+    div.style.backgroundColor = "#1a73e8";
+    div.style.padding = "16px";
+    div.style.borderRadius = "8px";
+    div.style.marginTop = "12px";
+    div.style.fontSize = "18px";
+
+    // 🔹 Adding text content
+    // ✅ textContent — safe, no XSS risk
+    div.textContent = "Created with Modern JavaScript";
+
+    // Alternative: createTextNode (more explicit)
+    // const addText = document.createTextNode("Created with Modern JavaScript");
+    // div.appendChild(addText);
+
+    // 🔹 Append to DOM
+    document.body.appendChild(div);
+
+    console.log("Created element:", div);
+    console.log("Element ID:", div.id);
+
+    // ─────────────────────────────────────────────
+    // 🔹 Modern: insertAdjacentHTML / insertAdjacentElement
+    // ─────────────────────────────────────────────
+
+    // insertAdjacentHTML — insert HTML at specific positions
+    div.insertAdjacentHTML('afterend', `
+        <div style="background-color: #34a853; padding: 16px; border-radius: 8px; margin-top: 12px;">
+            Inserted with insertAdjacentHTML
+        </div>
+    `);
+
+    // Positions: 'beforebegin' | 'afterbegin' | 'beforeend' | 'afterend'
 </script>
 </html>

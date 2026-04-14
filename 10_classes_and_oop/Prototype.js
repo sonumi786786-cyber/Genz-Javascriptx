@@ -1,67 +1,106 @@
-// let myName = "hitesh     "
-// let mychannel = "chai     "
+﻿// ============================================
+// 📌 Prototypal Inheritance (ES2024+)
+// ============================================
 
-// console.log(myName.trueLength);
+// ─────────────────────────────────────────────
+// 🔹 Adding Methods to Built-in Prototypes
+// ─────────────────────────────────────────────
 
+const myHeros = ["thor", "spiderman"];
 
-let myHeros = ["thor", "spiderman"]
-
-
-let heroPower = {
+const heroPower = {
     thor: "hammer",
     spiderman: "sling",
 
-    getSpiderPower: function(){
+    getSpiderPower() {
         console.log(`Spidy power is ${this.spiderman}`);
-    }
-}
+    },
+};
 
-Object.prototype.hitesh = function(){
-    console.log(`hitesh is present in all objects`);
-}
+// ⚠️ Adding to Object.prototype affects ALL objects — use with caution!
+Object.prototype.DEEPAK = function () {
+    console.log("DEEPAK is present in all objects");
+};
 
-Array.prototype.heyHitesh = function(){
-    console.log(`Hitesh says hello`);
-}
+// ⚠️ Adding to Array.prototype only affects arrays
+Array.prototype.heyDEEPAK = function () {
+    console.log("DEEPAK says hello from arrays");
+};
 
-// heroPower.hitesh()
-// myHeros.hitesh()
-// myHeros.heyHitesh()
-// heroPower.heyHitesh()
+heroPower.DEEPAK();        // ✅ Works — objects inherit from Object.prototype
+myHeros.DEEPAK();          // ✅ Works — arrays → Array.prototype → Object.prototype
+myHeros.heyDEEPAK();       // ✅ Works — arrays have this
+// heroPower.heyDEEPAK();  // ❌ TypeError — objects don't have Array methods
 
-// inheritance
+// ─────────────────────────────────────────────
+// 🔹 Prototype Chain / Inheritance
+// ─────────────────────────────────────────────
 
 const User = {
     name: "chai",
-    email: "chai@google.com"
-}
+    email: "chai@google.com",
+};
 
 const Teacher = {
-    makeVideo: true
-}
+    makeVideo: true,
+};
 
 const TeachingSupport = {
-    isAvailable: false
-}
+    isAvailable: false,
+};
 
 const TASupport = {
-    makeAssignment: 'JS assignment',
+    makeAssignment: "JS assignment",
     fullTime: true,
-    __proto__: TeachingSupport
-}
+};
 
-Teacher.__proto__ = User
+// ─────────────────────────────────────────────
+// 🔹 ✅ Modern: Object.setPrototypeOf() (ES2015)
+// ─────────────────────────────────────────────
 
-// modern syntax
-Object.setPrototypeOf(TeachingSupport, Teacher)
+// Set Teacher to inherit from User
+Object.setPrototypeOf(Teacher, User);
+console.log("\n--- Prototype Chain ---");
+console.log("Teacher.name:", Teacher.name);          // "chai" — inherited from User
+console.log("Teacher.makeVideo:", Teacher.makeVideo); // true — own property
 
-let anotherUsername = "ChaiAurCode     "
+// Set TeachingSupport to inherit from Teacher
+Object.setPrototypeOf(TeachingSupport, Teacher);
+console.log("TeachingSupport.name:", TeachingSupport.name); // "chai" — inherited via chain
 
-String.prototype.trueLength = function(){
-    console.log(`${this}`);
-    console.log(`True length is: ${this.trim().length}`);
-}
+// Set TASupport to inherit from TeachingSupport
+Object.setPrototypeOf(TASupport, TeachingSupport);
+console.log("TASupport.name:", TASupport.name);             // "chai" — 3 levels deep!
+console.log("TASupport.makeVideo:", TASupport.makeVideo);   // true — from Teacher
 
-anotherUsername.trueLength()
-"hitesh".trueLength()
-"iceTea".trueLength()
+// ❌ Old way — DEPRECATED (still works but avoid):
+// TASupport.__proto__ = TeachingSupport;
+
+// ✅ Read the prototype:
+console.log("\nPrototype of Teacher:", Object.getPrototypeOf(Teacher) === User); // true
+
+// ─────────────────────────────────────────────
+// 🔹 Adding Methods to String.prototype
+// ─────────────────────────────────────────────
+
+String.prototype.trueLength = function () {
+    console.log(`"${this}"`);
+    console.log(`True length (trimmed): ${this.trim().length}`);
+};
+
+console.log("\n--- Custom String Method ---");
+"ChaiAurCode     ".trueLength();  // True length: 11
+"DEEPAK".trueLength();             // True length: 6
+"iceTea".trueLength();             // True length: 6
+
+/*
+ 🧠 Prototype Chain:
+ ─────────────────────────────────
+ TASupport → TeachingSupport → Teacher → User → Object.prototype → null
+
+ 🧠 Best Practices:
+ ✅ Use Object.setPrototypeOf() / Object.getPrototypeOf()
+ ❌ Avoid __proto__ — deprecated and slower
+ ✅ In modern code, prefer ES6 classes with extends for inheritance
+ ⚠️ Never modify built-in prototypes in production code (only for learning!)
+*/

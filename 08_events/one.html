@@ -3,61 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>htnml Events </title>
+    <title>HTML Events — Bubbling, Delegation & Prevention</title>
 </head>
-<body style="background-color: #414141; color: aliceblue;">
-    <h2>Amazing image</h2>
-    <div >
+<body style="background-color: #414141; color: aliceblue; font-family: system-ui, sans-serif; padding: 20px;">
+    <h2>Amazing Images</h2>
+    <div>
         <ul id="images">
             <li><img width="200px" id="photoshop" src="https://images.pexels.com/photos/3561339/pexels-photo-3561339.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt="photoshop"></li>
-            <li><img width="200px" id="japan" src="https://images.pexels.com/photos/3532553/pexels-photo-3532553.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""></li>
-            <li><img width="200px" id="river" src="https://images.pexels.com/photos/3532551/pexels-photo-3532551.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""></li>
-            <li><img width="200px" id="owl" src="https://images.pexels.com/photos/3532552/pexels-photo-3532552.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt="" ></li>
-            <li><img width="200px" id="prayer" src="https://images.pexels.com/photos/2522671/pexels-photo-2522671.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""></li>
+            <li><img width="200px" id="japan" src="https://images.pexels.com/photos/3532553/pexels-photo-3532553.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt="japan"></li>
+            <li><img width="200px" id="river" src="https://images.pexels.com/photos/3532551/pexels-photo-3532551.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt="river"></li>
+            <li><img width="200px" id="owl" src="https://images.pexels.com/photos/3532552/pexels-photo-3532552.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt="owl"></li>
+            <li><img width="200px" id="prayer" src="https://images.pexels.com/photos/2522671/pexels-photo-2522671.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt="prayer"></li>
             <li><a style="color: aliceblue;" href="https://google.com" id="google">Google</a></li>
         </ul>
    </div>
 </body>
 <script>
-    // document.getElementById('owl').onclick = function(){
-    //     alert("owl clicked")
-    // }
-
-     // attachEvent()
-    // jQuery - on
-
+    // ============================================
+    // 📌 Event Properties Reference:
+    // ============================================
     // type, timestamp, defaultPrevented
-    // target, toElement, srcElement, currentTarget,
+    // target, srcElement, currentTarget
     // clientX, clientY, screenX, screenY
-    // altkey, ctrlkey, shiftkey, keyCode
+    // altKey, ctrlKey, shiftKey, keyCode
 
-    // document.getElementById('images').addEventListener('click', function(e){
-    //     console.log("clicked inside the ul");
-    // }, false)
+    // ─────────────────────────────────────────────
+    // 🔹 Event Delegation — ONE listener handles all clicks
+    // ─────────────────────────────────────────────
 
-    // document.getElementById('owl').addEventListener('click', function(e){
-    //     console.log("owl clicked");
-    //     e.stopPropagation()
-    // }, false)
-    
-    // document.getElementById('google').addEventListener('click',function(e){
-    //     e.preventDefault();
-    //     e.stopPropagation()
-    //     console.log("google clicked");
-    // }, false)
-   
-    
-    document.querySelector('#images').addEventListener('click', function(e){
-        console.log(e.target.tagName);
+    // ✅ Instead of adding a listener to each <img>, we listen on the parent <ul>
+    // and check what was actually clicked using e.target
+
+    document.querySelector('#images').addEventListener('click', (e) => {
+        console.log("Clicked tag:", e.target.tagName);
+
+        // Handle image clicks — remove the parent <li>
         if (e.target.tagName === 'IMG') {
-            console.log(e.target.id);
-            let removeIt = e.target.parentNode
-            removeIt.remove()
+            console.log("Removing image:", e.target.id);
+
+            // ✅ Modern: closest() finds the nearest ancestor matching a selector
+            const listItem = e.target.closest('li');
+            listItem?.remove(); // ✅ Optional chaining + remove()
         }
-    
-        
-    })
-    
-    //removeIt.parentNode.removeChild(removeIt)
+
+        // Handle link clicks — prevent navigation
+        if (e.target.tagName === 'A') {
+            e.preventDefault();       // Cancel navigation
+            e.stopPropagation();       // Stop event from bubbling up
+            console.log("Link click prevented:", e.target.id);
+        }
+    });
+
+    // ─────────────────────────────────────────────
+    // 🔹 AbortController — Modern listener removal (ES2024+)
+    // ─────────────────────────────────────────────
+
+    // const controller = new AbortController();
+    //
+    // document.querySelector('#owl').addEventListener('click', () => {
+    //     console.log("Owl clicked — this listener can be aborted");
+    // }, { signal: controller.signal });
+    //
+    // // Later, to remove the listener:
+    // controller.abort();
+
+    /*
+     🧠 Event Propagation Phases:
+     ─────────────────────────────────
+     1. CAPTURE phase — event travels DOWN from window → target
+     2. TARGET phase  — event reaches the clicked element
+     3. BUBBLE phase  — event travels UP from target → window
+
+     addEventListener('click', handler, true)  — listen during CAPTURE
+     addEventListener('click', handler, false) — listen during BUBBLE (default)
+    */
 </script>
 </html>

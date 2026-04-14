@@ -2,11 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DOM | Chai aur code</title>
+    <title>DOM — Parent, Child & Sibling Traversal</title>
 </head>
-<body style="background-color: #212121; color: #fff;">
+<body style="background-color: #212121; color: #fff; font-family: system-ui, sans-serif; padding: 20px;">
     <div class="parent">
         <!-- this is a comment -->
         <div class="day">Monday</div>
@@ -16,24 +15,46 @@
     </div>
 </body>
 <script>
-    const parent = document.querySelector('.parent')
-    // console.log(parent);
-    // console.log(parent.children);
-    // console.log(parent.children[1].innerHTML);
+    // ============================================
+    // 📌 DOM Traversal — Modern JS
+    // ============================================
 
-    // for (let i = 0; i < parent.children.length; i++) {
-    //      console.log(parent.children[i].innerHTML);
-        
-    // }
-    parent.children[1].style.color = "orange"
-    // console.log(parent.firstElementChild);
-    // console.log(parent.lastElementChild);
+    const parent = document.querySelector('.parent');
 
-    const dayOne = document.querySelector('.day')
-    // console.log(dayOne);
-    // console.log(dayOne.parentElement);
-    // console.log(dayOne.nextElementSibling);
+    // 🔹 Children (Element nodes only — ignores text/comment nodes)
+    console.log("Children:", parent.children);             // HTMLCollection
+    console.log("Children count:", parent.children.length); // 4
+    console.log("Second child:", parent.children[1].textContent); // "Tuesday"
 
-    console.log("NODES: ", parent.childNodes);
+    // Iterate children:
+    for (const child of parent.children) {
+        console.log("Day:", child.textContent);
+    }
+
+    // Style a specific child
+    parent.children[1].style.color = "orange";
+
+    // 🔹 First & Last Element Child
+    console.log("\nFirst child:", parent.firstElementChild.textContent);  // "Monday"
+    console.log("Last child:", parent.lastElementChild.textContent);     // "Thursday"
+
+    // 🔹 Sibling Navigation
+    const dayOne = document.querySelector('.day');
+    console.log("\nDay one:", dayOne.textContent);                            // "Monday"
+    console.log("Parent:", dayOne.parentElement.className);                   // "parent"
+    console.log("Next sibling:", dayOne.nextElementSibling.textContent);     // "Tuesday"
+
+    // 🔹 childNodes — includes ALL nodes (text, comments, elements)
+    console.log("\nAll Nodes:", parent.childNodes);
+    // NodeList includes: text nodes (whitespace), comment nodes, element nodes
+
+    // 🔹 Modern: closest() — finds nearest ancestor matching a selector
+    const wednesday = parent.children[2];
+    console.log("\nclosest('.parent'):", wednesday.closest('.parent')?.className); // "parent"
+    console.log("closest('body'):", wednesday.closest('body')?.tagName);         // "BODY"
+
+    // 🔹 Modern: matches() — checks if element matches a selector
+    console.log("matches('.day'):", wednesday.matches('.day'));   // true
+    console.log("matches('#id'):", wednesday.matches('#id'));     // false
 </script>
 </html>

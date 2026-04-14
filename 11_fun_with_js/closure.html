@@ -1,74 +1,161 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Closure aur chai</title>
+    <title>Closures — Modern JavaScript</title>
 </head>
-<body style="background-color: #313131;">
-    <button id="orange">Orange</button>
-    <button id="green">Green</button>
+<body style="background-color: #313131; color: #fff; font-family: system-ui, sans-serif; padding: 20px;">
+    <h2>Closures in Action</h2>
+    <button id="orange" style="padding: 12px 24px; font-size: 16px; cursor: pointer; margin: 5px; background: orange; border: none; border-radius: 6px;">Orange</button>
+    <button id="green" style="padding: 12px 24px; font-size: 16px; cursor: pointer; margin: 5px; background: green; color: white; border: none; border-radius: 6px;">Green</button>
+    <button id="blue" style="padding: 12px 24px; font-size: 16px; cursor: pointer; margin: 5px; background: #2196F3; color: white; border: none; border-radius: 6px;">Blue</button>
+    <p id="counter-display" style="font-size: 24px; margin-top: 20px;">Counter: 0</p>
+    <button id="increment" style="padding: 12px 24px; font-size: 16px; cursor: pointer; margin: 5px;">Increment</button>
+    <button id="decrement" style="padding: 12px 24px; font-size: 16px; cursor: pointer; margin: 5px;">Decrement</button>
 </body>
 
-    <script>
-    // function init() {
-    //     let name = "Mozilla"; 
-    //     function displayName() {
-    //         console.log(name); 
-    //     }
-    //     displayName();
-    // }
-    // init();
+<script>
+    // ============================================
+    // 📌 Closures — Modern JavaScript (ES2024+)
+    // ============================================
 
-    // function outer(){
-    //     let username = "hitesh"
-    //     console.log("OUTER", secret);
-    //     function inner(){
-    //         let secret = "my123"
-    //         console.log("inner", username);
-    //     }
-    //     function innerTwo(){
-    //         console.log("innerTwo", username);
-    //         console.log(secret);
-    //     }
-    //     inner()
-    //     innerTwo()
+    // A closure is formed when a function "remembers" variables
+    // from its outer scope, even after the outer function has returned.
 
-    // }
-    // outer()
-    // console.log("TOO OUTER", username);
+    // ─────────────────────────────────────────────
+    // 🔹 Basic Closure
+    // ─────────────────────────────────────────────
 
+    function makeFunc() {
+        const name = "Mozilla"; // Local variable
 
-    // function makeFunc() {
-    //     const name = "Mozilla";
-    //     function displayName() {
-    //         console.log(name);
-    //     }
-    //     return displayName;
-    // }
-
-    // const myFunc = makeFunc();
-    // myFunc();
-
-    </script>
-    <script>
-        // document.getElementById("orange").onclick = function(){
-        //     document.body.style.backgroundColor = `orange`
-        // }
-        // document.getElementById("green").onclick = function(){
-        //     document.body.style.backgroundColor = `green`
-        // }
-
-        function clickHandler(color){
-            // document.body.style.backgroundColor = `${color}`
-
-            return function(){
-                document.body.style.backgroundColor = `${color}`
-            }
+        function displayName() {
+            console.log(name); // ✅ Closure — accesses 'name' from outer scope
         }
 
-        document.getElementById('orange').onclick = clickHandler("orange")
-        document.getElementById('green').onclick = clickHandler("green")
+        return displayName; // Returns the function (not the result)
+    }
 
-    </script>
+    const myFunc = makeFunc();
+    myFunc(); // "Mozilla" — still has access to 'name' even after makeFunc() returned!
+
+    // ─────────────────────────────────────────────
+    // 🔹 Nested Closures — Scope Chain
+    // ─────────────────────────────────────────────
+
+    function outer() {
+        const username = "DEEPAK";
+
+        function inner() {
+            const secret = "my123";
+            console.log("inner can see:", username); // ✅ Accesses outer
+        }
+
+        function innerTwo() {
+            console.log("innerTwo can see:", username); // ✅ Accesses outer
+            // console.log(secret); // ❌ Cannot access inner's variables
+        }
+
+        inner();
+        innerTwo();
+    }
+
+    outer();
+    // console.log(username); // ❌ Cannot access function's local variables
+
+    // ─────────────────────────────────────────────
+    // 🔹 Practical Closure: Color Changer (Event Handler Factory)
+    // ─────────────────────────────────────────────
+
+    const clickHandler = (color) => {
+        // ✅ Returns a closure that "remembers" the color
+        return () => {
+            document.body.style.backgroundColor = color;
+        };
+    };
+
+    // Each button gets its own closure with a different color:
+    document.getElementById("orange").addEventListener("click", clickHandler("orange"));
+    document.getElementById("green").addEventListener("click", clickHandler("green"));
+    document.getElementById("blue").addEventListener("click", clickHandler("#2196F3"));
+
+    // ─────────────────────────────────────────────
+    // 🔹 Practical Closure: Counter (Encapsulation)
+    // ─────────────────────────────────────────────
+
+    const createCounter = (initialValue = 0) => {
+        let count = initialValue; // ✅ Private — only accessible via returned methods
+
+        return {
+            increment: () => ++count,
+            decrement: () => --count,
+            getCount: () => count,
+        };
+    };
+
+    const counter = createCounter(0);
+    const display = document.getElementById("counter-display");
+
+    const updateDisplay = () => {
+        display.textContent = `Counter: ${counter.getCount()}`;
+    };
+
+    document.getElementById("increment").addEventListener("click", () => {
+        counter.increment();
+        updateDisplay();
+    });
+
+    document.getElementById("decrement").addEventListener("click", () => {
+        counter.decrement();
+        updateDisplay();
+    });
+
+    // ─────────────────────────────────────────────
+    // 🔹 Practical Closure: Memoization (Caching)
+    // ─────────────────────────────────────────────
+
+    const memoize = (fn) => {
+        const cache = new Map(); // ✅ Closure over cache
+
+        return (...args) => {
+            const key = JSON.stringify(args);
+            if (cache.has(key)) {
+                console.log("Cache hit:", key);
+                return cache.get(key);
+            }
+            const result = fn(...args);
+            cache.set(key, result);
+            return result;
+        };
+    };
+
+    const expensiveAdd = (a, b) => {
+        console.log("Computing...");
+        return a + b;
+    };
+
+    const memoizedAdd = memoize(expensiveAdd);
+    console.log("\n--- Memoization ---");
+    console.log(memoizedAdd(2, 3)); // "Computing..." → 5
+    console.log(memoizedAdd(2, 3)); // "Cache hit" → 5 (no recomputation!)
+    console.log(memoizedAdd(4, 5)); // "Computing..." → 9
+</script>
+
+<script>
+    /*
+     🧠 Closures Summary:
+     ─────────────────────────────────
+     ✅ A closure gives a function access to its outer scope's variables
+     ✅ Even after the outer function has returned
+     ✅ Each closure instance has its own copy of the outer variables
+
+     Common Use Cases:
+     ✅ Data privacy (counter pattern — private variables without classes)
+     ✅ Event handler factories (clickHandler pattern)
+     ✅ Memoization / Caching
+     ✅ Partial application / Currying
+     ✅ Module pattern (IIFE returning public API)
+    */
+</script>
 </html>

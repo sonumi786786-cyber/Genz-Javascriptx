@@ -1,42 +1,83 @@
-function multipleBy5(num){
+// ============================================
+// 📌 Prototype & Constructor Functions (ES2024+)
+// ============================================
 
-    return num*5
+// ─────────────────────────────────────────────
+// 🔹 Functions are Objects — they can have properties
+// ─────────────────────────────────────────────
+
+function multiplyBy5(num) {
+    return num * 5;
 }
 
-multipleBy5.power = 2
+multiplyBy5.power = 2; // Functions can have custom properties!
 
-console.log(multipleBy5(5));
-console.log(multipleBy5.power);
-console.log(multipleBy5.prototype);
+console.log("Result:", multiplyBy5(5));         // 25
+console.log("Custom property:", multiplyBy5.power);   // 2
+console.log("Prototype:", multiplyBy5.prototype);     // {} (every function has a prototype)
 
-function createUser(username, score){
-    this.username = username
-    this.score = score
+// ─────────────────────────────────────────────
+// 🔹 Constructor Function with Prototype Methods
+// ─────────────────────────────────────────────
+
+function CreateUser(username, score) {
+    this.username = username;
+    this.score = score;
 }
 
-createUser.prototype.increment = function(){
-    this.score++
+// ✅ Add methods to prototype — shared across ALL instances (memory efficient)
+CreateUser.prototype.increment = function () {
+    this.score++;
+};
+
+CreateUser.prototype.printMe = function () {
+    console.log(`${this.username}'s score is ${this.score}`);
+};
+
+const chai = new CreateUser("chai", 25);
+const tea = new CreateUser("tea", 250);
+
+console.log("\n--- Prototype Methods ---");
+chai.printMe();      // "chai's score is 25"
+chai.increment();
+chai.printMe();      // "chai's score is 26"
+tea.printMe();       // "tea's score is 250"
+
+// ⚠️ Without 'new', 'this' would be undefined/global — methods won't work!
+// const broken = CreateUser("broken", 0); // ❌ No 'new' — returns undefined
+
+// ─────────────────────────────────────────────
+// 🔹 ✅ Modern Equivalent: ES6 Class
+// ─────────────────────────────────────────────
+
+class UserClass {
+    constructor(username, score) {
+        this.username = username;
+        this.score = score;
+    }
+
+    increment() {
+        this.score++;
+    }
+
+    printMe() {
+        console.log(`${this.username}'s score is ${this.score}`);
+    }
 }
-createUser.prototype.printMe = function(){
-    console.log(`price is ${this.score}`);
-}
 
-const chai = new createUser("chai", 25)
-const tea = createUser("tea", 250)
-
-chai.printMe()
-
+const modern = new UserClass("modern", 100);
+console.log("\n--- ES6 Class ---");
+modern.printMe();
+modern.increment();
+modern.printMe();
 
 /*
+ 🧠 What happens behind the scenes when 'new' is used:
+ ─────────────────────────────────
+ 1. A new object is created: {}
+ 2. The prototype is linked: newObj.__proto__ = Constructor.prototype
+ 3. The constructor is called: Constructor.call(newObj, args)
+ 4. If no non-primitive return, the new object is returned
 
-Here's what happens behind the scenes when the new keyword is used:
-
-A new object is created: The new keyword initiates the creation of a new JavaScript object.
-
-A prototype is linked: The newly created object gets linked to the prototype property of the constructor function. This means that it has access to properties and methods defined on the constructor's prototype.
-
-The constructor is called: The constructor function is called with the specified arguments and this is bound to the newly created object. If no explicit return value is specified from the constructor, JavaScript assumes this, the newly created object, to be the intended return value.
-
-The new object is returned: After the constructor function has been called, if it doesn't return a non-primitive value (object, array, function, etc.), the newly created object is returned.
-
+ Classes are syntactic sugar — they use the same prototype mechanism underneath.
 */

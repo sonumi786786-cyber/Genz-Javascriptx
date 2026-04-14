@@ -3,29 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>React</title>
+    <title>bind() — Preserving 'this' in Classes</title>
 </head>
-<body>
-    <button>Button Clicked</button>
+<body style="background-color: #212121; color: #fff; font-family: system-ui, sans-serif; padding: 20px;">
+    <h2>bind() vs Arrow Function</h2>
+    <button id="bind-btn" style="padding: 12px 24px; font-size: 16px; cursor: pointer; margin: 5px;">bind() Button</button>
+    <button id="arrow-btn" style="padding: 12px 24px; font-size: 16px; cursor: pointer; margin: 5px;">Arrow Function Button</button>
 </body>
 <script>
-    class React {
-        constructor(){
-            this.library = "React"
-            this.server = "https://localhost:300"
+    // ============================================
+    // 📌 bind() — Preserving 'this' Context
+    // ============================================
 
-            //requirement
+    // ─────────────────────────────────────────────
+    // 🔹 Method 1: Using bind() — Classic approach
+    // ─────────────────────────────────────────────
+
+    class ReactBind {
+        constructor() {
+            this.library = "React";
+            this.server = "https://localhost:3000";
+
+            // ✅ bind(this) creates a new function with 'this' permanently bound
             document
-                .querySelector('button')
-                .addEventListener('click', this.handleClick.bind(this))
-
+                .querySelector('#bind-btn')
+                .addEventListener('click', this.handleClick.bind(this));
         }
-        handleClick(){
-            console.log("button clicked");
-            console.log(this.server);
+
+        handleClick() {
+            console.log("bind() — Library:", this.library);
+            console.log("bind() — Server:", this.server);
         }
     }
 
-    const app = new React()
+    // ─────────────────────────────────────────────
+    // 🔹 Method 2: Using Arrow Function — Modern approach
+    // ─────────────────────────────────────────────
+
+    class ReactArrow {
+        constructor() {
+            this.library = "React";
+            this.server = "https://localhost:3000";
+
+            // ✅ Arrow function inherits 'this' from the enclosing scope
+            document
+                .querySelector('#arrow-btn')
+                .addEventListener('click', () => this.handleClick());
+        }
+
+        handleClick() {
+            console.log("Arrow — Library:", this.library);
+            console.log("Arrow — Server:", this.server);
+        }
+    }
+
+    // ─────────────────────────────────────────────
+    // 🔹 Method 3: Class Fields (Most Modern — ES2022)
+    // ─────────────────────────────────────────────
+
+    // class ReactClassField {
+    //     library = "React";
+    //     server = "https://localhost:3000";
+    //
+    //     // ✅ Arrow function as class field — auto-binds 'this'
+    //     handleClick = () => {
+    //         console.log("Class field — Library:", this.library);
+    //     };
+    //
+    //     constructor() {
+    //         document.querySelector('#btn')
+    //             .addEventListener('click', this.handleClick);
+    //         // No .bind() or wrapper needed!
+    //     }
+    // }
+
+    const app1 = new ReactBind();
+    const app2 = new ReactArrow();
+
+    /*
+     🧠 3 Ways to Handle 'this' in Event Listeners:
+     ─────────────────────────────────
+     1. .bind(this)            — Classic, explicit
+     2. Arrow wrapper          — () => this.method()
+     3. Arrow class field      — method = () => {} (ES2022, most concise)
+
+     ✅ All three work. Arrow class fields are the most modern approach.
+    */
 </script>
 </html>

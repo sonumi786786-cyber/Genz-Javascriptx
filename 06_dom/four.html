@@ -2,47 +2,68 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chai aur code | DOM</title>
+    <title>DOM — Add, Edit & Remove Elements</title>
 </head>
-<body style="background-color: #212121; color: #fff;">
+<body style="background-color: #212121; color: #fff; font-family: system-ui, sans-serif; padding: 20px;">
     <ul class="language">
         <li>Javascript</li>
     </ul>
 </body>
 <script>
-    function addLanguage(langName){
+    // ============================================
+    // 📌 DOM: Add, Edit & Remove Elements — Modern JS
+    // ============================================
+
+    // ─────────────────────────────────────────────
+    // 🔹 Adding Elements
+    // ─────────────────────────────────────────────
+
+    // ✅ Modern approach: textContent instead of innerHTML (safer)
+    const addLanguage = (langName) => {
         const li = document.createElement('li');
-        li.innerHTML = `${langName}`
-        document.querySelector('.language').appendChild(li)
-    }
-    addLanguage("python")
-    addLanguage("typescript")
+        li.textContent = langName;  // ✅ Safe — no XSS risk
+        document.querySelector('.language').appendChild(li);
+    };
 
-    function addOptiLanguage(langName){
-        const li = document.createElement('li');
-        li.appendChild(document.createTextNode(langName))
-        document.querySelector('.language').appendChild(li)
-    }
-    addOptiLanguage('golang')
+    addLanguage("Python");
+    addLanguage("TypeScript");
+    addLanguage("Golang");
 
-    //Edit
-    const secondLang = document.querySelector("li:nth-child(2)")
-    console.log(secondLang);
-    //secondLang.innerHTML = "Mojo"
-    const newli = document.createElement('li')
-    newli.textContent = "Mojo"
-    secondLang.replaceWith(newli)
+    // ─────────────────────────────────────────────
+    // 🔹 Editing Elements
+    // ─────────────────────────────────────────────
 
-    //edit
-    const firstLang = document.querySelector("li:first-child")
-    firstLang.outerHTML = '<li>TypeScript</li>'
+    // Method 1: replaceWith() — replace entire element
+    const secondLang = document.querySelector("li:nth-child(2)");
+    console.log("Replacing:", secondLang.textContent);
 
-    //remove
-    const lastLang = document.querySelector('li:last-child')
-    lastLang.remove()
+    const newLi = document.createElement('li');
+    newLi.textContent = "Mojo";
+    secondLang.replaceWith(newLi); // ✅ Clean modern API
 
+    // Method 2: outerHTML — replaces element's entire HTML
+    const firstLang = document.querySelector("li:first-child");
+    firstLang.outerHTML = '<li>Rust</li>';
 
+    // ─────────────────────────────────────────────
+    // 🔹 Removing Elements
+    // ─────────────────────────────────────────────
+
+    // ✅ Modern: element.remove() — clean and simple
+    const lastLang = document.querySelector('li:last-child');
+    console.log("Removing:", lastLang.textContent);
+    lastLang.remove();
+
+    // ❌ Old way: parentNode.removeChild(element)
+    // element.parentNode.removeChild(element);
+
+    // ─────────────────────────────────────────────
+    // 🔹 Log Final List
+    // ─────────────────────────────────────────────
+
+    const finalList = document.querySelectorAll('.language li');
+    console.log("\nFinal language list:");
+    finalList.forEach((li) => console.log(`  - ${li.textContent}`));
 </script>
 </html>

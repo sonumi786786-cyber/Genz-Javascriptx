@@ -2,23 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    
-    <title>DOM learning</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Learning — Selectors & Properties</title>
     <style>
-        .bg-black{
+        .bg-black {
             background-color: #212121;
             color: #fff;
+            font-family: system-ui, -apple-system, sans-serif;
+            padding: 20px;
         }
     </style>
 </head>
 <body class="bg-black">
-    <div >
-        <h1  id="title" class="heading">DOM learning on Chai aur code <span style="display: none;">test text</span></h1>
+    <div>
+        <h1 id="title" class="heading">DOM Learning <span style="display: none;">test text</span></h1>
         <h2>Lorem ipsum dolor sit.</h2>
         <h2>Lorem ipsum dolor sit.</h2>
         <h2>Lorem ipsum dolor sit.</h2>
         <p>Lorem ipsum dolor sit amet.</p>
-        <input type="password" name="" id="">
+        <input type="password" name="user-password" id="user-password">
 
         <ul>
             <li class="list-item">one</li>
@@ -27,5 +29,46 @@
             <li class="list-item">four</li>
         </ul>
     </div>
+<script>
+    // ============================================
+    // 📌 DOM Selectors & Properties (Modern JS)
+    // ============================================
+
+    // 🔹 getElementById — fastest selector
+    const title = document.getElementById('title');
+    console.log("getElementById:", title);
+
+    // 🔹 querySelector — CSS selector syntax (returns first match)
+    const heading = document.querySelector('.heading');
+    console.log("querySelector:", heading);
+    console.log("textContent:", heading.textContent);   // ✅ Includes hidden text
+    console.log("innerText:", heading.innerText);       // Only visible text
+    console.log("innerHTML:", heading.innerHTML);       // Raw HTML
+
+    // 🔹 querySelectorAll — returns NodeList (all matches)
+    const allItems = document.querySelectorAll('.list-item');
+    console.log("querySelectorAll:", allItems);         // NodeList
+    console.log("Length:", allItems.length);
+
+    // ✅ NodeList supports forEach directly:
+    allItems.forEach((item) => {
+        console.log("List item:", item.textContent);
+    });
+
+    // ✅ Convert to Array for full array methods:
+    const itemsArray = Array.from(allItems);
+    const filtered = itemsArray.filter((item) => item.textContent !== "two");
+    console.log("Filtered items:", filtered.map(i => i.textContent));
+
+    // 🔹 getElementsByClassName — returns HTMLCollection (live)
+    const listItems = document.getElementsByClassName('list-item');
+    console.log("HTMLCollection:", listItems);
+    // ⚠️ HTMLCollection does NOT have forEach — convert to Array first:
+    // Array.from(listItems).forEach(...)
+
+    // 🔹 Modifying elements
+    title.textContent = "DOM Learning — Modern JS";  // ✅ Safe (no XSS risk)
+    // title.innerHTML = "<b>Bold</b>";               // ⚠️ Use cautiously (XSS risk)
+</script>
 </body>
 </html>

@@ -3,20 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>setInterval & clearInterval — Modern JS</title>
 </head>
-<body>
+<body style="background-color: #212121; color: #fff; font-family: system-ui, sans-serif; padding: 20px;">
     <h1>Chai aur Javascript</h1>
-    <button id="start">Start</button>
-    <button id="stop">Stop</button>
+    <p id="timestamp" style="font-size: 24px; font-family: monospace;"></p>
+    <button id="start" style="padding: 10px 20px; font-size: 16px; cursor: pointer;">Start</button>
+    <button id="stop" style="padding: 10px 20px; font-size: 16px; cursor: pointer;">Stop</button>
 </body>
 <script>
-    const sayDate = function(str){
-        console.log(str, Date.now());
-    }
+    // ============================================
+    // 📌 setInterval & clearInterval — Modern JS
+    // ============================================
 
-    const intervalId = setInterval(sayDate, 1000, "hi")
+    // setInterval schedules a function to run repeatedly at fixed intervals
 
-    clearInterval(intervalId)
+    const display = document.querySelector('#timestamp');
+    let intervalId = null;
+
+    const sayDate = (prefix) => {
+        const now = new Date().toLocaleTimeString();
+        console.log(`${prefix} ${now}`);
+        display.textContent = `${prefix} ${now}`;
+    };
+
+    // ✅ Start/Stop pattern — prevents multiple intervals stacking
+    document.querySelector('#start').addEventListener('click', () => {
+        if (!intervalId) {
+            intervalId = setInterval(sayDate, 1000, "🕐");
+            console.log("Timer started");
+        }
+    });
+
+    document.querySelector('#stop').addEventListener('click', () => {
+        if (intervalId) {
+            clearInterval(intervalId);
+            intervalId = null; // ✅ Reset so it can be started again
+            display.textContent = "Timer stopped ✋";
+            console.log("Timer stopped");
+        }
+    });
+
+    /*
+     🧠 setInterval Tips:
+     ─────────────────────────────────
+     ✅ Always store the intervalId so you can clear it later
+     ✅ Guard against multiple intervals with an if-check
+     ✅ clearInterval + null reset pattern for start/stop toggles
+     ⚠️ setInterval doesn't guarantee exact timing — it queues the callback
+    */
 </script>
 </html>

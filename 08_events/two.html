@@ -3,25 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>setTimeout & clearTimeout — Modern JS</title>
 </head>
-<body>
-    <h1>Chai aur code</h1>
-    <button id="stop">Stop</button>
+<body style="background-color: #212121; color: #fff; font-family: system-ui, sans-serif; padding: 20px;">
+    <h1>Chai aur Code</h1>
+    <button id="stop" style="padding: 10px 20px; font-size: 16px; cursor: pointer;">Stop Timer</button>
 </body>
 <script>
-    const sayHitesh = function(){
-        console.log("Hitesh");
-    }
-    const changeText = function(){
-        document.querySelector('h1').innerHTML = "best JS series"
-    }
+    // ============================================
+    // 📌 setTimeout & clearTimeout — Modern JS
+    // ============================================
 
-    const changeMe = setTimeout(changeText, 2000)
+    // setTimeout schedules a function to run ONCE after a delay
 
-    document.querySelector('#stop').addEventListener('click', function(){
-        clearTimeout(changeMe)
-        console.log("STOPPED")
-    })
+    const changeText = () => {
+        document.querySelector('h1').textContent = "Best JS Series 🚀";
+    };
+
+    // Schedule text change after 2 seconds
+    const timerId = setTimeout(changeText, 2000);
+
+    // Click "Stop" button to cancel the scheduled change
+    document.querySelector('#stop').addEventListener('click', () => {
+        clearTimeout(timerId);
+        console.log("Timer STOPPED — text change cancelled");
+        document.querySelector('h1').textContent = "Timer was stopped ✋";
+    }, { once: true }); // ✅ { once: true } — auto-removes listener after first click
 </script>
 </html>
