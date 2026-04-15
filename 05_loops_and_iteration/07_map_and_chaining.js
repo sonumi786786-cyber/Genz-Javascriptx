@@ -1,19 +1,19 @@
-﻿// ============================================
-// 📌 map & Method Chaining (ES2024+)
+// ============================================
+// map aur Method Chaining (ES2024+)
 // ============================================
 
 const myNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-// ─────────────────────────────────────────────
-// 🔹 map() — Transforms each element, returns NEW array
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// map() — har element transform karta hai, NAYI array return karta hai
+// -----------------------------------------
 
 const addTen = myNumbers.map((num) => num + 10);
 console.log("Add 10:", addTen); // [11, 12, ..., 20]
 
-// ─────────────────────────────────────────────
-// 🔹 Method Chaining — map + map + filter
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// Method Chaining — map + map + filter
+// -----------------------------------------
 
 const chained = myNumbers
     .map((num) => num * 10)       // [10, 20, 30, ..., 100]
@@ -22,16 +22,16 @@ const chained = myNumbers
 
 console.log("Chained:", chained);
 
-// ─────────────────────────────────────────────
-// 🔹 flatMap() — map + flat in one step (ES2019)
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// flatMap() — map + flat ek step me (ES2019)
+// -----------------------------------------
 
 console.log("\n--- flatMap ---");
 const sentences = ["Hello world", "Goodbye moon"];
 const words = sentences.flatMap((sentence) => sentence.split(" "));
 console.log("flatMap:", words); // ["Hello", "world", "Goodbye", "moon"]
 
-// More practical example:
+// Practical example:
 const users = [
     { name: "DEEPAK", hobbies: ["coding", "teaching"] },
     { name: "Sam", hobbies: ["gaming", "reading"] },
@@ -40,13 +40,13 @@ const users = [
 const allHobbies = users.flatMap((user) => user.hobbies);
 console.log("All hobbies:", allHobbies); // ["coding", "teaching", "gaming", "reading"]
 
-// ─────────────────────────────────────────────
-// 🔹 map vs forEach — Key Difference
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// map vs forEach — Key Difference
+// -----------------------------------------
 
 console.log("\n--- map vs forEach ---");
-// map() returns a new array → use when you want TRANSFORMED data
-// forEach() returns undefined → use when you want SIDE EFFECTS (logging, mutations)
+// map() nayi array return karta hai -> jab TRANSFORMED data chahiye tab use karo
+// forEach() undefined return karta hai -> jab SIDE EFFECTS chahiye (logging, mutations)
 
 const mapped = myNumbers.map((n) => n * 2);
 console.log("map result:", mapped);       // [2, 4, 6, ..., 20]

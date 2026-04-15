@@ -1,10 +1,10 @@
-﻿// ============================================
-// 📌 OOP — Objects & 'this' Keyword (ES2024+)
+// ============================================
+// OOP — Objects aur 'this' Keyword (ES2024+)
 // ============================================
 
-// ─────────────────────────────────────────────
-// 🔹 Object Literal — simplest OOP pattern
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// Object Literal — sabse simple OOP pattern
+// -----------------------------------------
 
 const user = {
     username: "DEEPAK",
@@ -21,11 +21,11 @@ console.log("--- Object Literal ---");
 console.log(user.username);
 user.getUserDetails();
 
-// 📌 `this` inside an object method refers to the object itself
+// Object method ke andar `this` object khud ko refer karta hai
 
-// ─────────────────────────────────────────────
-// 🔹 Constructor Function (Pre-ES6 way)
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// Constructor Function (Purana tarika)
+// -----------------------------------------
 
 function UserConstructor(username, loginCount, isLoggedIn) {
     this.username = username;
@@ -36,7 +36,7 @@ function UserConstructor(username, loginCount, isLoggedIn) {
         console.log(`Welcome ${this.username}`);
     };
 
-    // 'return this' is implicit when using 'new'
+    // 'new' ke saath 'return this' implicit hota hai
 }
 
 const userOne = new UserConstructor("DEEPAK", 12, true);
@@ -47,9 +47,9 @@ userOne.greeting();
 userTwo.greeting();
 console.log("Constructor:", userOne.constructor.name); // "UserConstructor"
 
-// ─────────────────────────────────────────────
-// 🔹 ✅ Modern Way: ES6 Class (same thing, cleaner syntax)
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// Modern Way: ES6 Class (same cheez, cleaner syntax)
+// -----------------------------------------
 
 class UserModern {
     constructor(username, loginCount, isLoggedIn) {
@@ -69,12 +69,11 @@ userThree.greeting();
 console.log("Instance of UserModern:", userThree instanceof UserModern); // true
 
 /*
- 🧠 What happens when 'new' is used:
- ─────────────────────────────────
- 1. A new empty object is created: {}
- 2. The prototype is linked (object.__proto__ = Constructor.prototype)
- 3. The constructor is called with 'this' bound to the new object
- 4. If no explicit return, the new object is returned
+ 'new' use karne pe kya hota hai:
+ 1. Ek naya empty object banta hai: {}
+ 2. Prototype link hota hai (object.__proto__ = Constructor.prototype)
+ 3. Constructor call hota hai 'this' naye object se bound hoke
+ 4. Agar explicit return nahi hai, toh naya object return hota hai
 
- Classes are syntactic sugar over constructor functions + prototypes.
+ Classes constructor functions + prototypes ke upar syntactic sugar hain.
 */

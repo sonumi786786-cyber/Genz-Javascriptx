@@ -1,10 +1,10 @@
-﻿// ============================================
-// 📌 Objects in Modern JavaScript (ES2024+)
+// ============================================
+// Objects in Modern JavaScript (ES2024+)
 // ============================================
 
-// ─────────────────────────────────────────────
-// 🔹 Object Literals with Symbols
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// Object Literals with Symbols
+// -----------------------------------------
 
 const mySym = Symbol("key1");
 
@@ -19,32 +19,32 @@ const jsUser = {
     lastLoginDays: ["Monday", "Saturday"],
 };
 
-// 📌 Accessing properties:
+// Properties access karna:
 console.log("Dot notation:", jsUser.email);
 console.log("Bracket notation:", jsUser["email"]);
 console.log("Spaced key:", jsUser["full name"]);
 console.log("Symbol key:", jsUser[mySym]);
 
-// ─────────────────────────────────────────────
-// 🔹 Modifying & Freezing Objects
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// Object Modify aur Freeze Karna
+// -----------------------------------------
 
 jsUser.email = "DEEPAK@chatgpt.com";
 console.log("\nUpdated email:", jsUser.email);
 
-// Object.freeze() — makes object immutable (shallow)
+// Object.freeze() — object immutable bana deta hai (shallow)
 Object.freeze(jsUser);
-jsUser.email = "DEEPAK@microsoft.com"; // ❌ Silently fails (or throws in strict mode)
-console.log("After freeze:", jsUser.email); // Still "DEEPAK@chatgpt.com"
+jsUser.email = "DEEPAK@microsoft.com"; // Silently fail hoga (strict mode me throw karega)
+console.log("After freeze:", jsUser.email); // "DEEPAK@chatgpt.com" hi rahega
 
-// ─────────────────────────────────────────────
-// 🔹 Shorthand Methods (ES2015)
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// Shorthand Methods (ES2015)
+// -----------------------------------------
 
 const user = {
     name: "DEEPAK",
 
-    // ✅ Modern shorthand method syntax (no need for `: function`)
+    // Modern shorthand method syntax (`: function` ki zarurat nahi)
     greeting() {
         console.log("Hello JS user");
     },
@@ -57,9 +57,9 @@ const user = {
 user.greeting();
 user.greetingTwo();
 
-// ─────────────────────────────────────────────
-// 🔹 Optional Chaining with Objects (ES2020)
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// Optional Chaining with Objects (ES2020)
+// -----------------------------------------
 
 console.log("\n--- Optional Chaining ---");
 const profile = {
@@ -70,13 +70,13 @@ const profile = {
 };
 
 console.log("City:", profile.address?.city);       // "Jaipur"
-console.log("Zip:", profile.address?.zip);         // undefined (no error!)
-console.log("Phone:", profile.contact?.phone);     // undefined (no error!)
-// Without ?. this would throw: TypeError: Cannot read property 'phone' of undefined
+console.log("Zip:", profile.address?.zip);         // undefined (error nahi aayega!)
+console.log("Phone:", profile.contact?.phone);     // undefined (error nahi aayega!)
+// Bina ?. ke yeh TypeError dega: Cannot read property 'phone' of undefined
 
-// ─────────────────────────────────────────────
-// 🔹 Object.groupBy() (ES2024) 🆕
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// Object.groupBy() (ES2024)
+// -----------------------------------------
 
 console.log("\n--- Object.groupBy (ES2024) ---");
 const products = [
@@ -86,11 +86,11 @@ const products = [
     { name: "Spinach", category: "vegetable" },
 ];
 
-// Groups array elements by a key (returns plain object with grouped arrays)
+// Array elements ko key ke hisaab se group karta hai (plain object return karta hai)
 if (typeof Object.groupBy === "function") {
     const grouped = Object.groupBy(products, (item) => item.category);
     console.log("Grouped:", grouped);
     // { fruit: [{...}, {...}], vegetable: [{...}, {...}] }
 } else {
-    console.log("Object.groupBy not available in this runtime (Node 21+)");
+    console.log("Object.groupBy is runtime me available nahi hai (Node 21+)");
 }

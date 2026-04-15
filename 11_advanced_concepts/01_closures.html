@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -17,44 +17,44 @@
 
 <script>
     // ============================================
-    // 📌 Closures — Modern JavaScript (ES2024+)
+    // Closures — Modern JavaScript (ES2024+)
     // ============================================
 
-    // A closure is formed when a function "remembers" variables
-    // from its outer scope, even after the outer function has returned.
+    // Closure tab banta hai jab ek function apne outer scope ke variables ko
+    // "yaad" rakhta hai, outer function return hone ke baad bhi.
 
-    // ─────────────────────────────────────────────
-    // 🔹 Basic Closure
-    // ─────────────────────────────────────────────
+    // -----------------------------------------
+    // Basic Closure
+    // -----------------------------------------
 
     function makeFunc() {
         const name = "Mozilla"; // Local variable
 
         function displayName() {
-            console.log(name); // ✅ Closure — accesses 'name' from outer scope
+            console.log(name); // Closure — outer scope ka 'name' access karta hai
         }
 
-        return displayName; // Returns the function (not the result)
+        return displayName; // Function return karo (result nahi)
     }
 
     const myFunc = makeFunc();
-    myFunc(); // "Mozilla" — still has access to 'name' even after makeFunc() returned!
+    myFunc(); // "Mozilla" — makeFunc() return hone ke baad bhi 'name' access hai!
 
-    // ─────────────────────────────────────────────
-    // 🔹 Nested Closures — Scope Chain
-    // ─────────────────────────────────────────────
+    // -----------------------------------------
+    // Nested Closures — Scope Chain
+    // -----------------------------------------
 
     function outer() {
         const username = "DEEPAK";
 
         function inner() {
             const secret = "my123";
-            console.log("inner can see:", username); // ✅ Accesses outer
+            console.log("inner can see:", username); // Outer ka access hai
         }
 
         function innerTwo() {
-            console.log("innerTwo can see:", username); // ✅ Accesses outer
-            // console.log(secret); // ❌ Cannot access inner's variables
+            console.log("innerTwo can see:", username); // Outer ka access hai
+            // console.log(secret); // inner ke variables access nahi kar sakte
         }
 
         inner();
@@ -62,30 +62,30 @@
     }
 
     outer();
-    // console.log(username); // ❌ Cannot access function's local variables
+    // console.log(username); // Function ke local variables bahar access nahi ho sakte
 
-    // ─────────────────────────────────────────────
-    // 🔹 Practical Closure: Color Changer (Event Handler Factory)
-    // ─────────────────────────────────────────────
+    // -----------------------------------------
+    // Practical Closure: Color Changer (Event Handler Factory)
+    // -----------------------------------------
 
     const clickHandler = (color) => {
-        // ✅ Returns a closure that "remembers" the color
+        // Closure return karta hai jo color "yaad" rakhta hai
         return () => {
             document.body.style.backgroundColor = color;
         };
     };
 
-    // Each button gets its own closure with a different color:
+    // Har button ko apna closure milta hai alag color ke saath:
     document.getElementById("orange").addEventListener("click", clickHandler("orange"));
     document.getElementById("green").addEventListener("click", clickHandler("green"));
     document.getElementById("blue").addEventListener("click", clickHandler("#2196F3"));
 
-    // ─────────────────────────────────────────────
-    // 🔹 Practical Closure: Counter (Encapsulation)
-    // ─────────────────────────────────────────────
+    // -----------------------------------------
+    // Practical Closure: Counter (Encapsulation)
+    // -----------------------------------------
 
     const createCounter = (initialValue = 0) => {
-        let count = initialValue; // ✅ Private — only accessible via returned methods
+        let count = initialValue; // Private hai — sirf returned methods se access ho sakta hai
 
         return {
             increment: () => ++count,
@@ -111,12 +111,12 @@
         updateDisplay();
     });
 
-    // ─────────────────────────────────────────────
-    // 🔹 Practical Closure: Memoization (Caching)
-    // ─────────────────────────────────────────────
+    // -----------------------------------------
+    // Practical Closure: Memoization (Caching)
+    // -----------------------------------------
 
     const memoize = (fn) => {
-        const cache = new Map(); // ✅ Closure over cache
+        const cache = new Map(); // Cache pe closure hai
 
         return (...args) => {
             const key = JSON.stringify(args);
@@ -137,25 +137,24 @@
 
     const memoizedAdd = memoize(expensiveAdd);
     console.log("\n--- Memoization ---");
-    console.log(memoizedAdd(2, 3)); // "Computing..." → 5
-    console.log(memoizedAdd(2, 3)); // "Cache hit" → 5 (no recomputation!)
-    console.log(memoizedAdd(4, 5)); // "Computing..." → 9
+    console.log(memoizedAdd(2, 3)); // "Computing..." -> 5
+    console.log(memoizedAdd(2, 3)); // "Cache hit" -> 5 (dobara compute nahi hua!)
+    console.log(memoizedAdd(4, 5)); // "Computing..." -> 9
 </script>
 
 <script>
     /*
-     🧠 Closures Summary:
-     ─────────────────────────────────
-     ✅ A closure gives a function access to its outer scope's variables
-     ✅ Even after the outer function has returned
-     ✅ Each closure instance has its own copy of the outer variables
+     Closures Summary:
+     - Closure function ko uske outer scope ke variables ka access deta hai
+     - Outer function return hone ke baad bhi access rehta hai
+     - Har closure instance ke paas outer variables ki apni copy hoti hai
 
      Common Use Cases:
-     ✅ Data privacy (counter pattern — private variables without classes)
-     ✅ Event handler factories (clickHandler pattern)
-     ✅ Memoization / Caching
-     ✅ Partial application / Currying
-     ✅ Module pattern (IIFE returning public API)
+     - Data privacy (counter pattern — classes ke bina private variables)
+     - Event handler factories (clickHandler pattern)
+     - Memoization / Caching
+     - Partial application / Currying
+     - Module pattern (IIFE jo public API return kare)
     */
 </script>
 </html>

@@ -1,21 +1,21 @@
 // ============================================
-// 📌 While & Do-While Loops (ES2024+)
+// While aur Do-While Loops (ES2024+)
 // ============================================
 
-// ─────────────────────────────────────────────
-// 🔹 While Loop — checks condition BEFORE executing
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// While Loop — pehle condition check karta hai, phir execute karta hai
+// -----------------------------------------
 
 let index = 0;
 console.log("--- While Loop ---");
 while (index <= 10) {
     console.log(`Value of index: ${index}`);
-    index += 2; // ✅ Modern: use += instead of index = index + 2
+    index += 2; // Modern: index = index + 2 ki jagah += use karo
 }
 
-// ─────────────────────────────────────────────
-// 🔹 While Loop with Array
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// While Loop with Array
+// -----------------------------------------
 
 const myArray = ["flash", "batman", "superman"];
 
@@ -26,12 +26,11 @@ while (i < myArray.length) {
     i++;
 }
 
-// ─────────────────────────────────────────────
-// 🔹 Do-While Loop — executes FIRST, then checks condition
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// Do-While Loop — pehle execute karta hai, phir condition check karta hai
+// -----------------------------------------
 
-// 📌 Even if the condition is false from the start,
-// the body executes at least once!
+// Condition shuru se false ho tab bhi body ek baar zarur chalegi!
 
 let score = 11;
 console.log("\n--- Do-While Loop ---");
@@ -39,28 +38,27 @@ do {
     console.log(`Score is ${score}`);
     score++;
 } while (score <= 10);
-// Output: "Score is 11" — runs once even though 11 > 10
+// Output: "Score is 11" — ek baar chala chahe 11 > 10
 
-// ─────────────────────────────────────────────
-// 🔹 Practical Example: User Input Simulation
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// Practical Example: User Input Simulation
+// -----------------------------------------
 
 console.log("\n--- Practical Do-While ---");
 let attempts = 0;
 let password;
 
 do {
-    // Simulating password attempts
+    // Password attempts simulate kar rahe hain
     password = attempts === 2 ? "correct123" : "wrong";
     attempts++;
-    console.log(`Attempt ${attempts}: ${password === "correct123" ? "✅ Success!" : "❌ Wrong password"}`);
+    console.log(`Attempt ${attempts}: ${password === "correct123" ? "Success!" : "Wrong password"}`);
 } while (password !== "correct123" && attempts < 5);
 
 /*
- 🧠 When to Use:
- ─────────────────────────────────
- while    → When you may not need to execute the body at all
- do-while → When you need at least one execution (e.g., menus, retries)
- for      → When you know the iteration count in advance
- for...of → When iterating over iterables (arrays, strings, etc.)
+ Kab kya use karo:
+ while    -> Jab body ek baar bhi execute na ho toh chalega
+ do-while -> Jab kam se kam ek baar execute hona zaruri hai (menus, retries)
+ for      -> Jab iteration count pehle se pata ho
+ for...of -> Jab iterables iterate karne hain (arrays, strings, etc.)
 */

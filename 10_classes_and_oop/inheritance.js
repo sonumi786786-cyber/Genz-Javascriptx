@@ -1,10 +1,10 @@
 // ============================================
-// 📌 Class Inheritance (ES2024+)
+// Class Inheritance (ES2024+)
 // ============================================
 
-// ─────────────────────────────────────────────
-// 🔹 Base Class (Parent)
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// Base Class (Parent)
+// -----------------------------------------
 
 class User {
     constructor(username) {
@@ -16,13 +16,13 @@ class User {
     }
 }
 
-// ─────────────────────────────────────────────
-// 🔹 Derived Class (Child) — extends + super
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// Derived Class (Child) — extends + super
+// -----------------------------------------
 
 class Teacher extends User {
     constructor(username, email, password) {
-        super(username); // ✅ Must call super() before using 'this'
+        super(username); // 'this' use karne se pehle super() call karna ZARURI hai
         this.email = email;
         this.password = password;
     }
@@ -31,14 +31,14 @@ class Teacher extends User {
         console.log(`A new course was added by ${this.username}`);
     }
 
-    // ✅ Method overriding — child redefines parent method
+    // Method overriding — child parent ke method ko redefine karta hai
     logMe() {
         console.log(`TEACHER: ${this.username} (${this.email})`);
     }
 
-    // ✅ Call parent method using super
+    // super se parent ka method call karo
     logAsUser() {
-        super.logMe(); // Calls User's logMe()
+        super.logMe(); // User ka logMe() call hoga
     }
 }
 
@@ -46,15 +46,15 @@ const chai = new Teacher("chai", "chai@teacher.com", "123");
 
 console.log("--- Inheritance ---");
 chai.logMe();       // "TEACHER: chai (chai@teacher.com)" — overridden
-chai.logAsUser();   // "USERNAME is chai" — parent's version
+chai.logAsUser();   // "USERNAME is chai" — parent ka version
 chai.addCourse();   // "A new course was added by chai"
 
 const masalaChai = new User("masalaChai");
-masalaChai.logMe(); // "USERNAME is masalaChai" — parent's version
+masalaChai.logMe(); // "USERNAME is masalaChai" — parent ka version
 
-// ─────────────────────────────────────────────
-// 🔹 instanceof — Check inheritance chain
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// instanceof — Inheritance chain check karo
+// -----------------------------------------
 
 console.log("\n--- instanceof ---");
 console.log("chai instanceof Teacher:", chai instanceof Teacher); // true
@@ -63,11 +63,10 @@ console.log("masalaChai instanceof Teacher:", masalaChai instanceof Teacher); //
 console.log("masalaChai instanceof User:", masalaChai instanceof User);       // true
 
 /*
- 🧠 Inheritance Rules:
- ─────────────────────────────────
- ✅ Use extends to create a child class
- ✅ Call super() in constructor before accessing 'this'
- ✅ Override methods by redefining them in the child class
- ✅ Access parent methods with super.methodName()
- ✅ instanceof checks the ENTIRE prototype chain
+ Inheritance Rules:
+ - Child class banane ke liye extends use karo
+ - Constructor me 'this' use karne se pehle super() call karo
+ - Child class me method redefine karke override karo
+ - Parent ke methods super.methodName() se access karo
+ - instanceof POORI prototype chain check karta hai
 */

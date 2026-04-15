@@ -1,5 +1,5 @@
 // ============================================
-// 📌 Quick Test File — Modern JS Feature Check
+// Quick Test — Modern JS Feature Check
 // ============================================
 
 const features = [
@@ -11,11 +11,12 @@ const features = [
     { name: "String.replaceAll()", test: () => "a-b-c".replaceAll("-", "_") === "a_b_c" },
 ];
 
-console.log("🧪 Modern JavaScript Feature Check:\n");
+// Modern JS features supported hain ya nahi check karo
+console.log("Modern JavaScript Feature Check:\n");
 for (const { name, test } of features) {
     try {
-        console.log(`  ${test() ? "✅" : "❌"} ${name}`);
+        console.log(`  ${test() ? "PASS" : "FAIL"} ${name}`);
     } catch {
-        console.log(`  ❌ ${name} (not supported)`);
+        console.log(`  FAIL ${name} (not supported)`);
     }
 }

@@ -1,31 +1,31 @@
 // ============================================
-// 📌 Prototype & Constructor Functions (ES2024+)
+// Prototype aur Constructor Functions (ES2024+)
 // ============================================
 
-// ─────────────────────────────────────────────
-// 🔹 Functions are Objects — they can have properties
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// Functions bhi Objects hain — inme properties ho sakti hain
+// -----------------------------------------
 
 function multiplyBy5(num) {
     return num * 5;
 }
 
-multiplyBy5.power = 2; // Functions can have custom properties!
+multiplyBy5.power = 2; // Functions me custom properties bhi add ho sakti hain!
 
 console.log("Result:", multiplyBy5(5));         // 25
 console.log("Custom property:", multiplyBy5.power);   // 2
-console.log("Prototype:", multiplyBy5.prototype);     // {} (every function has a prototype)
+console.log("Prototype:", multiplyBy5.prototype);     // {} (har function ka prototype hota hai)
 
-// ─────────────────────────────────────────────
-// 🔹 Constructor Function with Prototype Methods
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// Constructor Function with Prototype Methods
+// -----------------------------------------
 
 function CreateUser(username, score) {
     this.username = username;
     this.score = score;
 }
 
-// ✅ Add methods to prototype — shared across ALL instances (memory efficient)
+// Prototype me methods add karo — SAARE instances me share hote hain (memory efficient)
 CreateUser.prototype.increment = function () {
     this.score++;
 };
@@ -43,12 +43,12 @@ chai.increment();
 chai.printMe();      // "chai's score is 26"
 tea.printMe();       // "tea's score is 250"
 
-// ⚠️ Without 'new', 'this' would be undefined/global — methods won't work!
-// const broken = CreateUser("broken", 0); // ❌ No 'new' — returns undefined
+// 'new' ke bina, 'this' undefined/global hoga — methods kaam nahi karenge!
+// const broken = CreateUser("broken", 0); // 'new' nahi hai — undefined return karega
 
-// ─────────────────────────────────────────────
-// 🔹 ✅ Modern Equivalent: ES6 Class
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// Modern Equivalent: ES6 Class
+// -----------------------------------------
 
 class UserClass {
     constructor(username, score) {
@@ -72,12 +72,11 @@ modern.increment();
 modern.printMe();
 
 /*
- 🧠 What happens behind the scenes when 'new' is used:
- ─────────────────────────────────
- 1. A new object is created: {}
- 2. The prototype is linked: newObj.__proto__ = Constructor.prototype
- 3. The constructor is called: Constructor.call(newObj, args)
- 4. If no non-primitive return, the new object is returned
+ 'new' ke peechhe kya hota hai:
+ 1. Naya object banta hai: {}
+ 2. Prototype link hota hai: newObj.__proto__ = Constructor.prototype
+ 3. Constructor call hota hai: Constructor.call(newObj, args)
+ 4. Agar non-primitive return nahi hai, toh naya object return hota hai
 
- Classes are syntactic sugar — they use the same prototype mechanism underneath.
+ Classes syntactic sugar hain — andar same prototype mechanism use hota hai.
 */

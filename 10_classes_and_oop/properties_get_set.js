@@ -1,16 +1,16 @@
 // ============================================
-// 📌 Getter & Setter — Object.defineProperty (ES2024+)
+// Getter aur Setter — Object.defineProperty (ES2024+)
 // ============================================
 
-// ─────────────────────────────────────────────
-// 🔹 Constructor Function with defineProperty
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// Constructor Function with defineProperty
+// -----------------------------------------
 
 function User(email, password) {
     this._email = email;
     this._password = password;
 
-    // ✅ Define computed properties with getters/setters
+    // Computed properties define karo getters/setters ke saath
     Object.defineProperty(this, "email", {
         get() {
             return this._email.toUpperCase();
@@ -30,7 +30,7 @@ function User(email, password) {
             if (value.length >= 6) {
                 this._password = value;
             } else {
-                console.warn("Password must be at least 6 characters");
+                console.warn("Password minimum 6 characters hona chahiye");
             }
         },
     });
@@ -45,9 +45,9 @@ console.log("Password:", chai.password); // "******"
 chai.email = "new@test.com";
 console.log("Updated:", chai.email);     // "NEW@TEST.COM"
 
-// ─────────────────────────────────────────────
-// 🔹 ✅ Modern Equivalent: Class with #private fields
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// Modern Equivalent: Class with #private fields
+// -----------------------------------------
 
 class ModernUser {
     #email;
@@ -82,6 +82,6 @@ console.log("Email:", modern.email);
 console.log("Password:", modern.password);
 
 /*
- 🧠 defineProperty is the low-level API that classes use behind the scenes.
- For new code, always prefer class syntax with #private fields.
+ defineProperty wo low-level API hai jo classes internally use karti hain.
+ Naye code me hamesha class syntax + #private fields prefer karo.
 */

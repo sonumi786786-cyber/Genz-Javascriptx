@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>bind() — Preserving 'this' in Classes</title>
+    <title>bind() — Classes me 'this' Preserve Karna</title>
 </head>
 <body style="background-color: #212121; color: #fff; font-family: system-ui, sans-serif; padding: 20px;">
     <h2>bind() vs Arrow Function</h2>
@@ -12,19 +12,19 @@
 </body>
 <script>
     // ============================================
-    // 📌 bind() — Preserving 'this' Context
+    // bind() — 'this' Context Preserve Karna
     // ============================================
 
-    // ─────────────────────────────────────────────
-    // 🔹 Method 1: Using bind() — Classic approach
-    // ─────────────────────────────────────────────
+    // -----------------------------------------
+    // Method 1: bind() — Classic approach
+    // -----------------------------------------
 
     class ReactBind {
         constructor() {
             this.library = "React";
             this.server = "https://localhost:3000";
 
-            // ✅ bind(this) creates a new function with 'this' permanently bound
+            // bind(this) naya function banata hai jisme 'this' permanently bound hota hai
             document
                 .querySelector('#bind-btn')
                 .addEventListener('click', this.handleClick.bind(this));
@@ -36,16 +36,16 @@
         }
     }
 
-    // ─────────────────────────────────────────────
-    // 🔹 Method 2: Using Arrow Function — Modern approach
-    // ─────────────────────────────────────────────
+    // -----------------------------------------
+    // Method 2: Arrow Function — Modern approach
+    // -----------------------------------------
 
     class ReactArrow {
         constructor() {
             this.library = "React";
             this.server = "https://localhost:3000";
 
-            // ✅ Arrow function inherits 'this' from the enclosing scope
+            // Arrow function 'this' ko enclosing scope se inherit karta hai
             document
                 .querySelector('#arrow-btn')
                 .addEventListener('click', () => this.handleClick());
@@ -57,15 +57,15 @@
         }
     }
 
-    // ─────────────────────────────────────────────
-    // 🔹 Method 3: Class Fields (Most Modern — ES2022)
-    // ─────────────────────────────────────────────
+    // -----------------------------------------
+    // Method 3: Class Fields (Sabse Modern — ES2022)
+    // -----------------------------------------
 
     // class ReactClassField {
     //     library = "React";
     //     server = "https://localhost:3000";
     //
-    //     // ✅ Arrow function as class field — auto-binds 'this'
+    //     // Arrow function as class field — auto-bind karta hai 'this'
     //     handleClick = () => {
     //         console.log("Class field — Library:", this.library);
     //     };
@@ -73,7 +73,7 @@
     //     constructor() {
     //         document.querySelector('#btn')
     //             .addEventListener('click', this.handleClick);
-    //         // No .bind() or wrapper needed!
+    //         // Na .bind() chahiye na wrapper!
     //     }
     // }
 
@@ -81,13 +81,12 @@
     const app2 = new ReactArrow();
 
     /*
-     🧠 3 Ways to Handle 'this' in Event Listeners:
-     ─────────────────────────────────
+     Event Listeners me 'this' handle karne ke 3 tarike:
      1. .bind(this)            — Classic, explicit
      2. Arrow wrapper          — () => this.method()
-     3. Arrow class field      — method = () => {} (ES2022, most concise)
+     3. Arrow class field      — method = () => {} (ES2022, sabse concise)
 
-     ✅ All three work. Arrow class fields are the most modern approach.
+     Teeno kaam karte hain. Arrow class fields sabse modern approach hai.
     */
 </script>
 </html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>setTimeout & clearTimeout — Modern JS</title>
+    <title>setTimeout aur clearTimeout — Modern JS</title>
 </head>
 <body style="background-color: #212121; color: #fff; font-family: system-ui, sans-serif; padding: 20px;">
     <h1>Chai aur Code</h1>
@@ -11,23 +11,23 @@
 </body>
 <script>
     // ============================================
-    // 📌 setTimeout & clearTimeout — Modern JS
+    // setTimeout aur clearTimeout — Modern JS
     // ============================================
 
-    // setTimeout schedules a function to run ONCE after a delay
+    // setTimeout ek function ko delay ke baad EK BAAR run karne ke liye schedule karta hai
 
     const changeText = () => {
-        document.querySelector('h1').textContent = "Best JS Series 🚀";
+        document.querySelector('h1').textContent = "Best JS Series";
     };
 
-    // Schedule text change after 2 seconds
+    // 2 second baad text change schedule karo
     const timerId = setTimeout(changeText, 2000);
 
-    // Click "Stop" button to cancel the scheduled change
+    // "Stop" button click karke scheduled change cancel karo
     document.querySelector('#stop').addEventListener('click', () => {
         clearTimeout(timerId);
-        console.log("Timer STOPPED — text change cancelled");
-        document.querySelector('h1').textContent = "Timer was stopped ✋";
-    }, { once: true }); // ✅ { once: true } — auto-removes listener after first click
+        console.log("Timer STOPPED — text change cancel ho gaya");
+        document.querySelector('h1').textContent = "Timer stop ho gaya";
+    }, { once: true }); // { once: true } — pehle click ke baad listener auto-remove ho jayega
 </script>
 </html>

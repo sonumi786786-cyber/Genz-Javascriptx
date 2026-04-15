@@ -1,10 +1,10 @@
 // ============================================
-// 📌 for...in Loop (ES2024+)
+// for...in Loop (ES2024+)
 // ============================================
 
-// ─────────────────────────────────────────────
-// 🔹 for...in with Objects — Iterates over keys
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// for...in with Objects — Keys iterate karta hai
+// -----------------------------------------
 
 const myObject = {
     js: "javascript",
@@ -15,12 +15,12 @@ const myObject = {
 
 console.log("--- Object with for...in ---");
 for (const key in myObject) {
-    console.log(`${key} is short for ${myObject[key]}`);
+    console.log(`${key} ka matlab hai ${myObject[key]}`);
 }
 
-// ─────────────────────────────────────────────
-// 🔹 for...in with Arrays — Iterates over INDICES (not values!)
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// for...in with Arrays — INDICES iterate karta hai (values nahi!)
+// -----------------------------------------
 
 const programming = ["js", "rb", "py", "java", "cpp"];
 
@@ -29,29 +29,29 @@ for (const index in programming) {
     console.log(`Index ${index}: ${programming[index]}`);
 }
 
-// ⚠️ for...in iterates over INDEXES (as strings), not values!
-// ✅ Use for...of for array values instead.
+// for...in INDEXES iterate karta hai (string ke roop me), values nahi!
+// Array values ke liye for...of use karo.
 
-// ─────────────────────────────────────────────
-// 🔹 ❌ for...in does NOT work with Maps
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// for...in Maps ke saath KAAM NAHI KARTA
+// -----------------------------------------
 
 // const map = new Map();
 // map.set("IN", "India");
 // for (const key in map) { console.log(key); }
-// ❌ Nothing prints — Maps are not enumerable with for...in
-// ✅ Use for...of with Maps instead
+// Kuch print nahi hoga — Maps for...in se enumerable nahi hain
+// Maps ke saath for...of use karo
 
-// ─────────────────────────────────────────────
-// 🔹 for...in vs for...of — Quick Comparison
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// for...in vs for...of — Quick Comparison
+// -----------------------------------------
 
 console.log("\n--- for...in vs for...of ---");
 const colors = ["red", "green", "blue"];
 
 console.log("for...in (keys/indices):");
 for (const key in colors) {
-    console.log(`  ${key} (type: ${typeof key})`); // "0", "1", "2" — strings!
+    console.log(`  ${key} (type: ${typeof key})`); // "0", "1", "2" — strings hain!
 }
 
 console.log("for...of (values):");
@@ -60,14 +60,13 @@ for (const value of colors) {
 }
 
 /*
- 🧠 Quick Reference:
- ─────────────────────────────────
- for...in → Iterates over ENUMERABLE PROPERTIES (keys/indices)
-            ✅ Best for: Objects
-            ⚠️ Works on arrays but gives string indices
-            ❌ Doesn't work with: Map, Set
+ Quick Reference:
+ for...in -> ENUMERABLE PROPERTIES (keys/indices) iterate karta hai
+             Objects ke liye best hai
+             Arrays pe chalega par string indices dega
+             Map, Set pe nahi chalega
 
- for...of → Iterates over ITERABLE VALUES
-            ✅ Best for: Arrays, Strings, Maps, Sets
-            ❌ Doesn't work with: Plain Objects (use Object.entries())
+ for...of -> ITERABLE VALUES iterate karta hai
+             Arrays, Strings, Maps, Sets ke liye best hai
+             Plain Objects pe nahi chalega (Object.entries() use karo)
 */

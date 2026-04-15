@@ -1,54 +1,54 @@
-﻿// ============================================
-// 📌 Control Flow — if/else (ES2024+)
+// ============================================
+// Control Flow — if/else (ES2024+)
 // ============================================
 
-// ─────────────────────────────────────────────
-// 🔹 Basic if/else
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// Basic if/else
+// -----------------------------------------
 
 const temperature = 41;
 
 if (temperature === 40) {
-    console.log("Temperature is exactly 40");
+    console.log("Temperature exactly 40 hai");
 } else if (temperature < 40) {
-    console.log("Temperature is less than 40");
+    console.log("Temperature 40 se kam hai");
 } else {
-    console.log("Temperature is greater than 40");
+    console.log("Temperature 40 se zyada hai");
 }
 
 // Comparison operators: <, >, <=, >=, ==, !=, ===, !==
 
-// ─────────────────────────────────────────────
-// 🔹 Block Scope in Conditionals
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// Block Scope in Conditionals
+// -----------------------------------------
 
 const score = 200;
 
 if (score > 100) {
-    const power = "fly"; // Block-scoped — only exists inside this { }
+    const power = "fly"; // Block-scoped — sirf is { } ke andar exist karta hai
     console.log(`User power: ${power}`);
 }
-// console.log(power); // ❌ ReferenceError — power is not defined outside
+// console.log(power); // ReferenceError — power block ke bahar defined nahi hai
 
-// ─────────────────────────────────────────────
-// 🔹 if/else if Chain
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// if/else if Chain
+// -----------------------------------------
 
 const balance = 1000;
 
 if (balance < 500) {
-    console.log("Balance is less than 500");
+    console.log("Balance 500 se kam hai");
 } else if (balance < 750) {
-    console.log("Balance is less than 750");
+    console.log("Balance 750 se kam hai");
 } else if (balance < 900) {
-    console.log("Balance is less than 900");
+    console.log("Balance 900 se kam hai");
 } else {
-    console.log("Balance is 900 or more");
+    console.log("Balance 900 ya usse zyada hai");
 }
 
-// ─────────────────────────────────────────────
-// 🔹 Logical Operators
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// Logical Operators
+// -----------------------------------------
 
 console.log("\n--- Logical Operators ---");
 const userLoggedIn = true;
@@ -56,19 +56,19 @@ const debitCard = true;
 const loggedInFromGoogle = false;
 const loggedInFromEmail = true;
 
-// AND (&&) — all conditions must be true
+// AND (&&) — saari conditions true honi chahiye
 if (userLoggedIn && debitCard) {
-    console.log("Allow to buy course (AND)");
+    console.log("Course kharidne ki permission hai (AND)");
 }
 
-// OR (||) — at least one condition must be true
+// OR (||) — kam se kam ek condition true honi chahiye
 if (loggedInFromGoogle || loggedInFromEmail) {
-    console.log("User logged in (OR)");
+    console.log("User logged in hai (OR)");
 }
 
-// ─────────────────────────────────────────────
-// 🔹 Optional Chaining in Conditions (ES2020)
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// Optional Chaining in Conditions (ES2020)
+// -----------------------------------------
 
 console.log("\n--- Optional Chaining ---");
 const user = {
@@ -76,29 +76,29 @@ const user = {
     address: { city: "Jaipur" },
 };
 
-// ✅ Safe property checking with optional chaining
+// Safe property checking with optional chaining
 if (user.address?.city) {
-    console.log(`User lives in ${user.address.city}`);
+    console.log(`User ${user.address.city} me rehta hai`);
 }
 
-// Without optional chaining, you'd need:
+// Bina optional chaining ke yeh likhna padta:
 // if (user.address && user.address.city) { ... }
 
-// ─────────────────────────────────────────────
-// 🔹 Short-circuit Evaluation (Modern Patterns)
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// Short-circuit Evaluation (Modern Patterns)
+// -----------------------------------------
 
 console.log("\n--- Short-circuit Patterns ---");
 
-// AND short-circuit — execute right side only if left is truthy
+// AND short-circuit — right side tab hi execute hoga jab left truthy hai
 userLoggedIn && console.log("Logged in (short-circuit AND)");
 
-// OR short-circuit — execute right side only if left is falsy
+// OR short-circuit — right side tab hi execute hoga jab left falsy hai
 const username = null;
 const displayName = username || "Guest";
 console.log("Display name:", displayName); // "Guest"
 
-// Nullish coalescing — better than || when 0 or "" are valid
+// Nullish coalescing — || se better jab 0 ya "" valid values hain
 const port = 0;
-console.log("Port (||):", port || 3000);   // 3000 — BUG! 0 is valid but falsy
-console.log("Port (??):", port ?? 3000);   // 0    — CORRECT! only null/undefined trigger fallback
+console.log("Port (||):", port || 3000);   // 3000 — BUG! 0 valid hai par falsy hai
+console.log("Port (??):", port ?? 3000);   // 0    — SAHI! sirf null/undefined pe fallback

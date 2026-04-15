@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>setInterval & clearInterval — Modern JS</title>
+    <title>setInterval aur clearInterval — Modern JS</title>
 </head>
 <body style="background-color: #212121; color: #fff; font-family: system-ui, sans-serif; padding: 20px;">
     <h1>Chai aur Javascript</h1>
@@ -13,10 +13,10 @@
 </body>
 <script>
     // ============================================
-    // 📌 setInterval & clearInterval — Modern JS
+    // setInterval aur clearInterval — Modern JS
     // ============================================
 
-    // setInterval schedules a function to run repeatedly at fixed intervals
+    // setInterval ek function ko fixed intervals pe repeatedly run karta hai
 
     const display = document.querySelector('#timestamp');
     let intervalId = null;
@@ -27,30 +27,29 @@
         display.textContent = `${prefix} ${now}`;
     };
 
-    // ✅ Start/Stop pattern — prevents multiple intervals stacking
+    // Start/Stop pattern — multiple intervals stack hone se rokata hai
     document.querySelector('#start').addEventListener('click', () => {
         if (!intervalId) {
-            intervalId = setInterval(sayDate, 1000, "🕐");
-            console.log("Timer started");
+            intervalId = setInterval(sayDate, 1000, "Time:");
+            console.log("Timer start ho gaya");
         }
     });
 
     document.querySelector('#stop').addEventListener('click', () => {
         if (intervalId) {
             clearInterval(intervalId);
-            intervalId = null; // ✅ Reset so it can be started again
-            display.textContent = "Timer stopped ✋";
-            console.log("Timer stopped");
+            intervalId = null; // Reset karo taaki dobara start ho sake
+            display.textContent = "Timer ruk gaya";
+            console.log("Timer ruk gaya");
         }
     });
 
     /*
-     🧠 setInterval Tips:
-     ─────────────────────────────────
-     ✅ Always store the intervalId so you can clear it later
-     ✅ Guard against multiple intervals with an if-check
-     ✅ clearInterval + null reset pattern for start/stop toggles
-     ⚠️ setInterval doesn't guarantee exact timing — it queues the callback
+     setInterval Tips:
+     - intervalId hamesha store karo taaki baad me clear kar sako
+     - Multiple intervals se bachne ke liye if-check lagao
+     - Start/stop toggles ke liye clearInterval + null reset pattern use karo
+     - setInterval exact timing guarantee nahi karta — callback queue me jaata hai
     */
 </script>
 </html>

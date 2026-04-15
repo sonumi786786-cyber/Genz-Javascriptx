@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DOM Learning — Selectors & Properties</title>
+    <title>DOM Learning — Selectors aur Properties</title>
     <style>
         .bg-black {
             background-color: #212121;
@@ -31,44 +31,44 @@
     </div>
 <script>
     // ============================================
-    // 📌 DOM Selectors & Properties (Modern JS)
+    // DOM Selectors aur Properties (Modern JS)
     // ============================================
 
-    // 🔹 getElementById — fastest selector
+    // getElementById — sabse fast selector
     const title = document.getElementById('title');
     console.log("getElementById:", title);
 
-    // 🔹 querySelector — CSS selector syntax (returns first match)
+    // querySelector — CSS selector syntax (pehla match return karta hai)
     const heading = document.querySelector('.heading');
     console.log("querySelector:", heading);
-    console.log("textContent:", heading.textContent);   // ✅ Includes hidden text
-    console.log("innerText:", heading.innerText);       // Only visible text
+    console.log("textContent:", heading.textContent);   // Hidden text bhi include karta hai
+    console.log("innerText:", heading.innerText);       // Sirf visible text
     console.log("innerHTML:", heading.innerHTML);       // Raw HTML
 
-    // 🔹 querySelectorAll — returns NodeList (all matches)
+    // querySelectorAll — NodeList return karta hai (saare matches)
     const allItems = document.querySelectorAll('.list-item');
     console.log("querySelectorAll:", allItems);         // NodeList
     console.log("Length:", allItems.length);
 
-    // ✅ NodeList supports forEach directly:
+    // NodeList pe directly forEach chalti hai:
     allItems.forEach((item) => {
         console.log("List item:", item.textContent);
     });
 
-    // ✅ Convert to Array for full array methods:
+    // Array me convert karo full array methods ke liye:
     const itemsArray = Array.from(allItems);
     const filtered = itemsArray.filter((item) => item.textContent !== "two");
     console.log("Filtered items:", filtered.map(i => i.textContent));
 
-    // 🔹 getElementsByClassName — returns HTMLCollection (live)
+    // getElementsByClassName — HTMLCollection return karta hai (live)
     const listItems = document.getElementsByClassName('list-item');
     console.log("HTMLCollection:", listItems);
-    // ⚠️ HTMLCollection does NOT have forEach — convert to Array first:
+    // HTMLCollection me forEach NAHI hai — pehle Array me convert karo:
     // Array.from(listItems).forEach(...)
 
-    // 🔹 Modifying elements
-    title.textContent = "DOM Learning — Modern JS";  // ✅ Safe (no XSS risk)
-    // title.innerHTML = "<b>Bold</b>";               // ⚠️ Use cautiously (XSS risk)
+    // Elements modify karna
+    title.textContent = "DOM Learning — Modern JS";  // Safe hai (XSS risk nahi)
+    // title.innerHTML = "<b>Bold</b>";               // Dhyan se use karo (XSS risk hai)
 </script>
 </body>
 </html>

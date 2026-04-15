@@ -1,13 +1,13 @@
 // ============================================
-// 📌 Promise Basics — Modern JavaScript (ES2024+)
+// Promise Basics — Modern JavaScript (ES2024+)
 // ============================================
 
-// A Promise represents a value that may not be available yet
-// but will be resolved (fulfilled) or rejected in the future.
+// Promise ek aisi value represent karta hai jo abhi available nahi hai
+// par future me resolve (fulfilled) ya reject ho jayegi.
 
-// ─────────────────────────────────────────────
-// 🔹 Creating a Promise
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// Promise Banana
+// -----------------------------------------
 
 const myPromise = new Promise((resolve, reject) => {
     const success = true;
@@ -21,14 +21,14 @@ const myPromise = new Promise((resolve, reject) => {
     }, 1000);
 });
 
-// ─────────────────────────────────────────────
-// 🔹 Consuming with .then/.catch/.finally
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// .then/.catch/.finally se consume karna
+// -----------------------------------------
 
 myPromise
     .then((data) => {
         console.log("Resolved:", data);
-        return data.message; // Chain: pass to next .then
+        return data.message; // Chain: agle .then ko pass karo
     })
     .then((message) => {
         console.log("Message:", message);
@@ -37,12 +37,12 @@ myPromise
         console.error("Rejected:", error.message);
     })
     .finally(() => {
-        console.log("Promise settled (done regardless of outcome)");
+        console.log("Promise settle ho gaya (chahe resolve ho ya reject)");
     });
 
-// ─────────────────────────────────────────────
-// 🔹 Consuming with async/await (Preferred)
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// async/await se consume karna (Preferred)
+// -----------------------------------------
 
 const consumePromise = async () => {
     try {
@@ -56,11 +56,10 @@ const consumePromise = async () => {
 consumePromise();
 
 /*
- 🧠 Promise States:
- ─────────────────────────────────
- ⏳ Pending   — initial state, not yet settled
- ✅ Fulfilled — operation completed successfully (resolve)
- ❌ Rejected  — operation failed (reject)
+ Promise States:
+ - Pending   -> initial state, abhi settle nahi hua
+ - Fulfilled -> operation successfully complete ho gaya (resolve)
+ - Rejected  -> operation fail ho gaya (reject)
 
- Once settled (fulfilled or rejected), a promise CANNOT change state.
+ Ek baar settle hone ke baad (fulfilled ya rejected), promise state CHANGE nahi ho sakta.
 */

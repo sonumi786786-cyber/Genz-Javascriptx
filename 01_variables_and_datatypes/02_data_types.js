@@ -1,53 +1,53 @@
-﻿// ============================================
-// 📌 Data Types in Modern JavaScript (ES2024+)
+// ============================================
+// Data Types in Modern JavaScript (ES2024+)
 // ============================================
 
-// 💡 "use strict" is automatic in ES Modules (.mjs or type:"module" in package.json)
-// In classic scripts, you can still add it — but modern projects use modules instead.
+// "use strict" ES Modules me automatic hota hai (.mjs ya type:"module" in package.json)
+// Classic scripts me manually add kar sakte ho, par modern projects modules use karte hain
 
-console.log(3 + 3); // 6 — always maintain code readability
+console.log(3 + 3); // 6 — code readability maintain rakho
 
 console.log("DEEPAK");
 
-// ─────────────────────────────────────────────
-// 🔹 Primitive Types (7 types — stored by value)
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// Primitive Types (7 types — value se store hote hain)
+// -----------------------------------------
 
-const name = "DEEPAK";        // String   — text enclosed in quotes
-const age = 18;               // Number   — integers & floats (up to 2^53 - 1)
-const isLoggedIn = false;     // Boolean  — true or false
-const state = undefined;      // Undefined — declared but no value assigned
-const outsideTemp = null;     // Null     — intentional empty value
-const id = Symbol("123");     // Symbol   — guaranteed unique identifier (ES2015)
-const bigNumber = 9007199254740991n; // BigInt — arbitrary precision integers (ES2020)
+const name = "DEEPAK";        // String — quotes me text
+const age = 18;               // Number — integers aur floats dono (2^53 - 1 tak)
+const isLoggedIn = false;     // Boolean — true ya false
+const state = undefined;      // Undefined — declare kiya par value nahi di
+const outsideTemp = null;     // Null — deliberately empty value
+const id = Symbol("123");     // Symbol — guaranteed unique identifier (ES2015)
+const bigNumber = 9007199254740991n; // BigInt — bahut bade numbers ke liye (ES2020)
 
-// 📌 typeof — checking data types
+// typeof — data type check karne ke liye
 console.log("typeof name:", typeof name);            // "string"
 console.log("typeof age:", typeof age);              // "number"
 console.log("typeof isLoggedIn:", typeof isLoggedIn);// "boolean"
 console.log("typeof state:", typeof state);          // "undefined"
-console.log("typeof outsideTemp:", typeof outsideTemp); // "object" ⚠️ This is a famous JS bug!
+console.log("typeof outsideTemp:", typeof outsideTemp); // "object" — yeh JS ka purana bug hai!
 console.log("typeof id:", typeof id);                // "symbol"
 console.log("typeof bigNumber:", typeof bigNumber);  // "bigint"
 
-// 🧠 The typeof null === "object" quirk:
-// This is a 25+ year old bug in JavaScript that will never be fixed
-// because it would break too much existing code.
+// typeof null === "object" quirk:
+// Yeh 25+ saal purana bug hai JS me jo kabhi fix nahi hoga
+// kyunki bahut sara existing code tut jayega
 
-// 📌 Symbol.description (ES2019) — access the description of a Symbol
+// Symbol.description (ES2019) — Symbol ki description access karo
 console.log("Symbol description:", id.description); // "123"
 
 /*
- 🧠 Data Type Reference Table:
- ──────────────────────────────────────────────────
+ Data Type Reference Table:
+ ------------------------------------------
  Type       | typeof result  | Example
- ──────────────────────────────────────────────────
+ ------------------------------------------
  String     | "string"       | "hello", 'world', `template`
  Number     | "number"       | 42, 3.14, NaN, Infinity
  BigInt     | "bigint"       | 123n, BigInt("999")
  Boolean    | "boolean"      | true, false
  Undefined  | "undefined"    | undefined
- Null       | "object" ⚠️   | null
+ Null       | "object"       | null
  Symbol     | "symbol"       | Symbol("desc")
- ──────────────────────────────────────────────────
+ ------------------------------------------
 */

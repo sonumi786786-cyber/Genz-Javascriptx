@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HTML Events — Bubbling, Delegation & Prevention</title>
+    <title>HTML Events — Bubbling, Delegation aur Prevention</title>
 </head>
 <body style="background-color: #414141; color: aliceblue; font-family: system-ui, sans-serif; padding: 20px;">
     <h2>Amazing Images</h2>
@@ -20,62 +20,61 @@
 </body>
 <script>
     // ============================================
-    // 📌 Event Properties Reference:
+    // Event Properties Reference:
     // ============================================
     // type, timestamp, defaultPrevented
     // target, srcElement, currentTarget
     // clientX, clientY, screenX, screenY
     // altKey, ctrlKey, shiftKey, keyCode
 
-    // ─────────────────────────────────────────────
-    // 🔹 Event Delegation — ONE listener handles all clicks
-    // ─────────────────────────────────────────────
+    // -----------------------------------------
+    // Event Delegation — EK listener saare clicks handle karta hai
+    // -----------------------------------------
 
-    // ✅ Instead of adding a listener to each <img>, we listen on the parent <ul>
-    // and check what was actually clicked using e.target
+    // Har <img> pe alag listener lagane ki jagah, parent <ul> pe ek listener lagao
+    // aur e.target se check karo ki actually kya click hua
 
     document.querySelector('#images').addEventListener('click', (e) => {
         console.log("Clicked tag:", e.target.tagName);
 
-        // Handle image clicks — remove the parent <li>
+        // Image clicks handle karo — parent <li> remove karo
         if (e.target.tagName === 'IMG') {
             console.log("Removing image:", e.target.id);
 
-            // ✅ Modern: closest() finds the nearest ancestor matching a selector
+            // closest() nearest ancestor dhundhta hai jo selector match kare
             const listItem = e.target.closest('li');
-            listItem?.remove(); // ✅ Optional chaining + remove()
+            listItem?.remove(); // Optional chaining + remove()
         }
 
-        // Handle link clicks — prevent navigation
+        // Link clicks handle karo — navigation roko
         if (e.target.tagName === 'A') {
-            e.preventDefault();       // Cancel navigation
-            e.stopPropagation();       // Stop event from bubbling up
+            e.preventDefault();       // Navigation cancel karo
+            e.stopPropagation();       // Event ko bubble hone se roko
             console.log("Link click prevented:", e.target.id);
         }
     });
 
-    // ─────────────────────────────────────────────
-    // 🔹 AbortController — Modern listener removal (ES2024+)
-    // ─────────────────────────────────────────────
+    // -----------------------------------------
+    // AbortController — Modern listener removal (ES2024+)
+    // -----------------------------------------
 
     // const controller = new AbortController();
     //
     // document.querySelector('#owl').addEventListener('click', () => {
-    //     console.log("Owl clicked — this listener can be aborted");
+    //     console.log("Owl clicked — yeh listener abort ho sakta hai");
     // }, { signal: controller.signal });
     //
-    // // Later, to remove the listener:
+    // // Baad me listener remove karne ke liye:
     // controller.abort();
 
     /*
-     🧠 Event Propagation Phases:
-     ─────────────────────────────────
-     1. CAPTURE phase — event travels DOWN from window → target
-     2. TARGET phase  — event reaches the clicked element
-     3. BUBBLE phase  — event travels UP from target → window
+     Event Propagation Phases:
+     1. CAPTURE phase — event window se target tak NEECHE jaata hai
+     2. TARGET phase  — event clicked element pe pahunchta hai
+     3. BUBBLE phase  — event target se window tak UPAR jaata hai
 
-     addEventListener('click', handler, true)  — listen during CAPTURE
-     addEventListener('click', handler, false) — listen during BUBBLE (default)
+     addEventListener('click', handler, true)  — CAPTURE me listen karo
+     addEventListener('click', handler, false) — BUBBLE me listen karo (default)
     */
 </script>
 </html>

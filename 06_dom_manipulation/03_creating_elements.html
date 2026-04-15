@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DOM — Creating Elements</title>
+    <title>DOM — Elements Create Karna</title>
 </head>
 <body style="background-color: #212121; color: #fff; font-family: system-ui, sans-serif; padding: 20px;">
 
 </body>
 <script>
     // ============================================
-    // 📌 Creating DOM Elements — Modern JS
+    // DOM Elements Create Karna — Modern JS
     // ============================================
 
-    // 🔹 Create a new element
+    // Naya element banao
     const div = document.createElement('div');
 
-    // 🔹 Set attributes & styles
+    // Attributes aur styles set karo
     div.className = "main";
-    div.id = `element-${crypto.randomUUID().slice(0, 8)}`; // ✅ Modern: crypto.randomUUID()
+    div.id = `element-${crypto.randomUUID().slice(0, 8)}`; // Modern: crypto.randomUUID()
     div.setAttribute("title", "Generated element");
     div.style.backgroundColor = "#1a73e8";
     div.style.padding = "16px";
@@ -26,28 +26,28 @@
     div.style.marginTop = "12px";
     div.style.fontSize = "18px";
 
-    // 🔹 Adding text content
-    // ✅ textContent — safe, no XSS risk
+    // Text content add karo
+    // textContent — safe hai, XSS risk nahi
     div.textContent = "Created with Modern JavaScript";
 
-    // Alternative: createTextNode (more explicit)
+    // Alternative: createTextNode (zyada explicit hai)
     // const addText = document.createTextNode("Created with Modern JavaScript");
     // div.appendChild(addText);
 
-    // 🔹 Append to DOM
+    // DOM me append karo
     document.body.appendChild(div);
 
     console.log("Created element:", div);
     console.log("Element ID:", div.id);
 
-    // ─────────────────────────────────────────────
-    // 🔹 Modern: insertAdjacentHTML / insertAdjacentElement
-    // ─────────────────────────────────────────────
+    // -----------------------------------------
+    // insertAdjacentHTML / insertAdjacentElement
+    // -----------------------------------------
 
-    // insertAdjacentHTML — insert HTML at specific positions
+    // insertAdjacentHTML — specific positions pe HTML insert karo
     div.insertAdjacentHTML('afterend', `
         <div style="background-color: #34a853; padding: 16px; border-radius: 8px; margin-top: 12px;">
-            Inserted with insertAdjacentHTML
+            insertAdjacentHTML se insert kiya
         </div>
     `);
 

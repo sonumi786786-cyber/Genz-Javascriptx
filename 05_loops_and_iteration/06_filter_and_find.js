@@ -1,37 +1,37 @@
 // ============================================
-// 📌 filter, find & findLast (ES2024+)
+// filter, find aur findLast (ES2024+)
 // ============================================
 
-// ─────────────────────────────────────────────
-// 🔹 forEach does NOT return values
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// forEach values return NAHI karta
+// -----------------------------------------
 
 const coding = ["js", "ruby", "java", "python", "cpp"];
 
 const values = coding.forEach((item) => {
-    return item; // ❌ forEach always returns undefined
+    return item; // forEach hamesha undefined return karta hai
 });
 console.log("forEach return:", values); // undefined
 
-// ─────────────────────────────────────────────
-// 🔹 filter() — Returns a NEW array of matching elements
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// filter() — matching elements ki NAYI array return karta hai
+// -----------------------------------------
 
 const myNums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-// ✅ Implicit return (short form)
+// Implicit return (short form)
 const greaterThan4 = myNums.filter((num) => num > 4);
 console.log("Filter > 4:", greaterThan4); // [5, 6, 7, 8, 9, 10]
 
-// ✅ Explicit return (block body)
+// Explicit return (block body)
 const evenNumbers = myNums.filter((num) => {
     return num % 2 === 0;
 });
 console.log("Even numbers:", evenNumbers); // [2, 4, 6, 8, 10]
 
-// ─────────────────────────────────────────────
-// 🔹 Achieving filter with forEach (old way)
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// forEach se filter achieve karna (purana tarika)
+// -----------------------------------------
 
 const filteredManually = [];
 myNums.forEach((num) => {
@@ -41,9 +41,9 @@ myNums.forEach((num) => {
 });
 console.log("Manual filter:", filteredManually); // [5, 6, 7, 8, 9, 10]
 
-// ─────────────────────────────────────────────
-// 🔹 find() — Returns FIRST matching element
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// find() — PEHLA matching element return karta hai
+// -----------------------------------------
 
 console.log("\n--- find ---");
 const firstAbove5 = myNums.find((num) => num > 5);
@@ -52,17 +52,17 @@ console.log("First > 5:", firstAbove5); // 6
 const notFound = myNums.find((num) => num > 100);
 console.log("Not found:", notFound); // undefined
 
-// ─────────────────────────────────────────────
-// 🔹 findIndex() — Returns INDEX of first match
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// findIndex() — pehle match ka INDEX return karta hai
+// -----------------------------------------
 
 console.log("\n--- findIndex ---");
 const indexAbove5 = myNums.findIndex((num) => num > 5);
 console.log("Index of first > 5:", indexAbove5); // 5
 
-// ─────────────────────────────────────────────
-// 🔹 findLast() & findLastIndex() (ES2023) 🆕
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// findLast() aur findLastIndex() (ES2023)
+// -----------------------------------------
 
 console.log("\n--- findLast / findLastIndex (ES2023) ---");
 const lastAbove5 = myNums.findLast((num) => num > 5);
@@ -71,9 +71,9 @@ console.log("Last > 5:", lastAbove5); // 10
 const lastIndexAbove5 = myNums.findLastIndex((num) => num > 5);
 console.log("Last index > 5:", lastIndexAbove5); // 9
 
-// ─────────────────────────────────────────────
-// 🔹 Practical Example: Filtering Objects
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// Practical Example: Objects Filter Karna
+// -----------------------------------------
 
 console.log("\n--- Filter with Objects ---");
 const books = [
@@ -96,16 +96,15 @@ console.log("History books:", historyBooks);
 const recentHistory = books.filter((bk) => bk.publish >= 1995 && bk.genre === "History");
 console.log("Recent history:", recentHistory);
 
-// Using find on objects
+// Objects pe find use karna
 const firstScience = books.find((bk) => bk.genre === "Science");
 console.log("First science book:", firstScience?.title); // "Book Five"
 
 /*
- 🧠 Quick Reference:
- ─────────────────────────────────
- filter()        → ALL matches (returns new array)
- find()          → FIRST match (returns element or undefined)
- findIndex()     → Index of FIRST match (returns -1 if not found)
- findLast()      → LAST match (ES2023)
- findLastIndex() → Index of LAST match (ES2023)
+ Quick Reference:
+ filter()        -> SAARE matches (nayi array return karta hai)
+ find()          -> PEHLA match (element ya undefined)
+ findIndex()     -> Pehle match ka index (-1 agar nahi mila)
+ findLast()      -> AAKHRI match (ES2023)
+ findLastIndex() -> Aakhri match ka index (ES2023)
 */

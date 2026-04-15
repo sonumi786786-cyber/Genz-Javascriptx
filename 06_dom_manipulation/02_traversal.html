@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DOM — Parent, Child & Sibling Traversal</title>
+    <title>DOM — Parent, Child aur Sibling Traversal</title>
 </head>
 <body style="background-color: #212121; color: #fff; font-family: system-ui, sans-serif; padding: 20px;">
     <div class="parent">
@@ -16,44 +16,44 @@
 </body>
 <script>
     // ============================================
-    // 📌 DOM Traversal — Modern JS
+    // DOM Traversal — Modern JS
     // ============================================
 
     const parent = document.querySelector('.parent');
 
-    // 🔹 Children (Element nodes only — ignores text/comment nodes)
+    // Children (sirf Element nodes — text/comment nodes ignore karta hai)
     console.log("Children:", parent.children);             // HTMLCollection
     console.log("Children count:", parent.children.length); // 4
     console.log("Second child:", parent.children[1].textContent); // "Tuesday"
 
-    // Iterate children:
+    // Children iterate karo:
     for (const child of parent.children) {
         console.log("Day:", child.textContent);
     }
 
-    // Style a specific child
+    // Specific child ko style karo
     parent.children[1].style.color = "orange";
 
-    // 🔹 First & Last Element Child
+    // First aur Last Element Child
     console.log("\nFirst child:", parent.firstElementChild.textContent);  // "Monday"
     console.log("Last child:", parent.lastElementChild.textContent);     // "Thursday"
 
-    // 🔹 Sibling Navigation
+    // Sibling Navigation
     const dayOne = document.querySelector('.day');
     console.log("\nDay one:", dayOne.textContent);                            // "Monday"
     console.log("Parent:", dayOne.parentElement.className);                   // "parent"
     console.log("Next sibling:", dayOne.nextElementSibling.textContent);     // "Tuesday"
 
-    // 🔹 childNodes — includes ALL nodes (text, comments, elements)
+    // childNodes — SAARE nodes include karta hai (text, comments, elements)
     console.log("\nAll Nodes:", parent.childNodes);
-    // NodeList includes: text nodes (whitespace), comment nodes, element nodes
+    // NodeList me text nodes (whitespace), comment nodes, element nodes sab hain
 
-    // 🔹 Modern: closest() — finds nearest ancestor matching a selector
+    // closest() — nearest ancestor dhundhta hai jo selector match kare
     const wednesday = parent.children[2];
     console.log("\nclosest('.parent'):", wednesday.closest('.parent')?.className); // "parent"
     console.log("closest('body'):", wednesday.closest('body')?.tagName);         // "BODY"
 
-    // 🔹 Modern: matches() — checks if element matches a selector
+    // matches() — check karta hai ki element selector match karta hai ya nahi
     console.log("matches('.day'):", wednesday.matches('.day'));   // true
     console.log("matches('#id'):", wednesday.matches('#id'));     // false
 </script>

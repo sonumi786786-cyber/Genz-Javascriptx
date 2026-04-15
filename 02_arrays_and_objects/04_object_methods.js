@@ -1,12 +1,12 @@
-﻿// ============================================
-// 📌 Objects — Advanced (ES2024+)
+// ============================================
+// Objects — Advanced (ES2024+)
 // ============================================
 
-// ─────────────────────────────────────────────
-// 🔹 Object Creation
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// Object Banana
+// -----------------------------------------
 
-// Object literal (preferred for most cases)
+// Object literal (zyada tar cases me preferred)
 const tinderUser = {};
 
 tinderUser.id = "123abc";
@@ -15,9 +15,9 @@ tinderUser.isLoggedIn = false;
 
 console.log("tinderUser:", tinderUser);
 
-// ─────────────────────────────────────────────
-// 🔹 Nested Objects
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// Nested Objects
+// -----------------------------------------
 
 const regularUser = {
     email: "some@gmail.com",
@@ -31,38 +31,38 @@ const regularUser = {
 
 console.log("Nested access:", regularUser.fullname.userfullname.firstname);
 
-// ✅ Optional chaining for safe nested access:
+// Optional chaining se safe nested access:
 console.log("Safe access:", regularUser.fullname?.userfullname?.firstname);
-console.log("Missing path:", regularUser.address?.city); // undefined instead of error
+console.log("Missing path:", regularUser.address?.city); // undefined, error nahi
 
-// ─────────────────────────────────────────────
-// 🔹 Merging Objects
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// Objects Merge Karna
+// -----------------------------------------
 
 const obj1 = { 1: "a", 2: "b" };
 const obj2 = { 3: "a", 4: "b" };
 const obj4 = { 5: "a", 6: "b" };
 
-// ✅ Spread operator — modern & clean
+// Spread operator — modern aur clean
 const obj3 = { ...obj1, ...obj2, ...obj4 };
 console.log("\nMerged (spread):", obj3);
 
-// Alternative: Object.assign() — older style
+// Alternative: Object.assign() — purana tarika
 // const obj3 = Object.assign({}, obj1, obj2, obj4);
 
-// ─────────────────────────────────────────────
-// 🔹 Deep Copy with structuredClone()
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// Deep Copy with structuredClone()
+// -----------------------------------------
 
 const nestedObj = { a: 1, b: { c: 2 } };
 const deepCopy = structuredClone(nestedObj);
 deepCopy.b.c = 99;
-console.log("\nOriginal:", nestedObj.b.c); // 2 — unchanged!
+console.log("\nOriginal:", nestedObj.b.c); // 2 — change nahi hua!
 console.log("Deep copy:", deepCopy.b.c);  // 99
 
-// ─────────────────────────────────────────────
-// 🔹 Array of Objects
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// Array of Objects
+// -----------------------------------------
 
 const users = [
     { id: 1, email: "user1@gmail.com" },
@@ -71,31 +71,31 @@ const users = [
 ];
 
 console.log("\nSecond user email:", users[1].email);
-// With optional chaining:
+// Optional chaining ke saath:
 console.log("Safe access:", users.at(1)?.email);
 
-// ─────────────────────────────────────────────
-// 🔹 Object Utility Methods
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// Object Utility Methods
+// -----------------------------------------
 
 console.log("\n--- Object Methods ---");
 console.log("keys:", Object.keys(tinderUser));     // ["id", "name", "isLoggedIn"]
 console.log("values:", Object.values(tinderUser)); // ["123abc", "Sammy", false]
 console.log("entries:", Object.entries(tinderUser));// [["id","123abc"], ["name","Sammy"],...]
 
-// ✅ Object.hasOwn() (ES2022) — replaces .hasOwnProperty()
+// Object.hasOwn() (ES2022) — .hasOwnProperty() ki jagah
 console.log("hasOwn:", Object.hasOwn(tinderUser, "isLoggedIn")); // true
 console.log("hasOwn:", Object.hasOwn(tinderUser, "password"));   // false
-// ❌ Old way: tinderUser.hasOwnProperty('isLoggedIn')
+// Purana tarika: tinderUser.hasOwnProperty('isLoggedIn')
 
-// ✅ Object.fromEntries() (ES2019) — reverse of Object.entries()
+// Object.fromEntries() (ES2019) — Object.entries() ka reverse
 const entries = [["name", "DEEPAK"], ["course", "JS"], ["price", "free"]];
 const fromEntries = Object.fromEntries(entries);
 console.log("\nfromEntries:", fromEntries); // { name: "DEEPAK", course: "JS", price: "free" }
 
-// ─────────────────────────────────────────────
-// 🔹 Destructuring (ES2015)
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// Destructuring (ES2015)
+// -----------------------------------------
 
 const course = {
     coursename: "js in hindi",
@@ -103,17 +103,17 @@ const course = {
     courseInstructor: "DEEPAK",
 };
 
-// Destructure with rename
+// Rename ke saath destructure
 const { courseInstructor: instructor } = course;
 console.log("\nInstructor:", instructor); // "DEEPAK"
 
-// Destructure with defaults
+// Default values ke saath destructure
 const { coursename, price, rating = "N/A" } = course;
 console.log("Course:", coursename, "| Price:", price, "| Rating:", rating);
 
-// ─────────────────────────────────────────────
-// 🔹 Nested Destructuring
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// Nested Destructuring
+// -----------------------------------------
 
 const response = {
     status: 200,

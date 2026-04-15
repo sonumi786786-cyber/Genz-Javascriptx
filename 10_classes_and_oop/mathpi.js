@@ -1,22 +1,22 @@
 // ============================================
-// 📌 Property Descriptors & Object.defineProperty (ES2024+)
+// Property Descriptors aur Object.defineProperty (ES2024+)
 // ============================================
 
-// ─────────────────────────────────────────────
-// 🔹 Inspecting Property Descriptors
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// Property Descriptors Inspect Karna
+// -----------------------------------------
 
 const descriptor = Object.getOwnPropertyDescriptor(Math, "PI");
 console.log("Math.PI descriptor:", descriptor);
 // { value: 3.14159..., writable: false, enumerable: false, configurable: false }
 
-// That's why Math.PI cannot be changed:
+// Isliye Math.PI change nahi ho sakta:
 Math.PI = 5;
-console.log("Math.PI:", Math.PI); // Still 3.14159... — writable: false
+console.log("Math.PI:", Math.PI); // Abhi bhi 3.14159... — writable: false
 
-// ─────────────────────────────────────────────
-// 🔹 Custom Object Property Descriptors
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// Custom Object Property Descriptors
+// -----------------------------------------
 
 const chai = {
     name: "ginger chai",
@@ -24,7 +24,7 @@ const chai = {
     isAvailable: true,
 
     orderChai() {
-        console.log("Preparing your chai...");
+        console.log("Chai ban rahi hai...");
     },
 };
 
@@ -32,26 +32,26 @@ console.log("\n--- Default Descriptors ---");
 console.log("name:", Object.getOwnPropertyDescriptor(chai, "name"));
 // { value: "ginger chai", writable: true, enumerable: true, configurable: true }
 
-// ─────────────────────────────────────────────
-// 🔹 Modifying Property Descriptors
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// Property Descriptors Modify Karna
+// -----------------------------------------
 
 Object.defineProperty(chai, "name", {
-    writable: false,    // ❌ Cannot change the value
-    enumerable: true,   // ✅ Shows up in for...in and Object.keys()
+    writable: false,    // Value change nahi hogi
+    enumerable: true,   // for...in aur Object.keys() me dikhega
 });
 
-chai.name = "masala chai"; // ❌ Silently fails (throws in strict mode)
-console.log("\nAfter writable:false:", chai.name); // Still "ginger chai"
+chai.name = "masala chai"; // Silently fail hoga (strict mode me throw karega)
+console.log("\nAfter writable:false:", chai.name); // Abhi bhi "ginger chai"
 
-// Make price non-enumerable (hidden from loops):
+// Price ko non-enumerable banao (loops se hide karo):
 Object.defineProperty(chai, "price", {
     enumerable: false,
 });
 
-// ─────────────────────────────────────────────
-// 🔹 Iterating — Skipping non-enumerable & functions
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// Iterating — non-enumerable aur functions skip karo
+// -----------------------------------------
 
 console.log("\n--- Filtered Iteration ---");
 for (const [key, value] of Object.entries(chai)) {
@@ -60,12 +60,12 @@ for (const [key, value] of Object.entries(chai)) {
     }
 }
 // Output: name: ginger chai, isAvailable: true
-// 'price' is hidden (enumerable: false)
-// 'orderChai' is skipped (typeof === 'function')
+// 'price' hidden hai (enumerable: false)
+// 'orderChai' skip hua (typeof === 'function')
 
-// ─────────────────────────────────────────────
-// 🔹 Object.defineProperties — Define multiple at once
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// Object.defineProperties — Ek saath multiple define karo
+// -----------------------------------------
 
 const settings = {};
 Object.defineProperties(settings, {
@@ -83,16 +83,15 @@ Object.defineProperties(settings, {
 
 console.log("\n--- defineProperties ---");
 console.log("Settings:", settings);
-settings.version = "3.0.0"; // ❌ Silently fails
-console.log("Version:", settings.version); // Still "2.0.0"
+settings.version = "3.0.0"; // Silently fail hoga
+console.log("Version:", settings.version); // Abhi bhi "2.0.0"
 
 /*
- 🧠 Property Descriptor Flags:
- ─────────────────────────────────
- writable     → Can the value be changed?
- enumerable   → Does it show up in for...in, Object.keys()?
- configurable → Can the property be deleted or descriptor modified?
+ Property Descriptor Flags:
+ writable     -> Kya value change ho sakti hai?
+ enumerable   -> Kya for...in, Object.keys() me dikhega?
+ configurable -> Kya property delete ho sakti hai ya descriptor modify ho sakta hai?
 
- All default to true for regular properties.
- All default to false for Object.defineProperty().
+ Regular properties me teeno default true hote hain.
+ Object.defineProperty() me teeno default false hote hain.
 */

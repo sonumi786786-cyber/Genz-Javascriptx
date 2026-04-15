@@ -1,10 +1,10 @@
-﻿// ============================================
-// 📌 Prototypal Inheritance (ES2024+)
+// ============================================
+// Prototypal Inheritance (ES2024+)
 // ============================================
 
-// ─────────────────────────────────────────────
-// 🔹 Adding Methods to Built-in Prototypes
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// Built-in Prototypes me Methods Add Karna
+// -----------------------------------------
 
 const myHeros = ["thor", "spiderman"];
 
@@ -17,24 +17,24 @@ const heroPower = {
     },
 };
 
-// ⚠️ Adding to Object.prototype affects ALL objects — use with caution!
+// Object.prototype me add karne se SAARE objects pe asar padta hai — dhyan se use karo!
 Object.prototype.DEEPAK = function () {
     console.log("DEEPAK is present in all objects");
 };
 
-// ⚠️ Adding to Array.prototype only affects arrays
+// Array.prototype me add karne se sirf arrays pe asar padta hai
 Array.prototype.heyDEEPAK = function () {
     console.log("DEEPAK says hello from arrays");
 };
 
-heroPower.DEEPAK();        // ✅ Works — objects inherit from Object.prototype
-myHeros.DEEPAK();          // ✅ Works — arrays → Array.prototype → Object.prototype
-myHeros.heyDEEPAK();       // ✅ Works — arrays have this
-// heroPower.heyDEEPAK();  // ❌ TypeError — objects don't have Array methods
+heroPower.DEEPAK();        // Kaam karega — objects Object.prototype se inherit karte hain
+myHeros.DEEPAK();          // Kaam karega — arrays -> Array.prototype -> Object.prototype
+myHeros.heyDEEPAK();       // Kaam karega — arrays me yeh hai
+// heroPower.heyDEEPAK();  // TypeError — objects me Array methods nahi hain
 
-// ─────────────────────────────────────────────
-// 🔹 Prototype Chain / Inheritance
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// Prototype Chain / Inheritance
+// -----------------------------------------
 
 const User = {
     name: "chai",
@@ -54,34 +54,34 @@ const TASupport = {
     fullTime: true,
 };
 
-// ─────────────────────────────────────────────
-// 🔹 ✅ Modern: Object.setPrototypeOf() (ES2015)
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// Modern: Object.setPrototypeOf() (ES2015)
+// -----------------------------------------
 
-// Set Teacher to inherit from User
+// Teacher ko User se inherit karao
 Object.setPrototypeOf(Teacher, User);
 console.log("\n--- Prototype Chain ---");
-console.log("Teacher.name:", Teacher.name);          // "chai" — inherited from User
-console.log("Teacher.makeVideo:", Teacher.makeVideo); // true — own property
+console.log("Teacher.name:", Teacher.name);          // "chai" — User se inherited
+console.log("Teacher.makeVideo:", Teacher.makeVideo); // true — apna property
 
-// Set TeachingSupport to inherit from Teacher
+// TeachingSupport ko Teacher se inherit karao
 Object.setPrototypeOf(TeachingSupport, Teacher);
-console.log("TeachingSupport.name:", TeachingSupport.name); // "chai" — inherited via chain
+console.log("TeachingSupport.name:", TeachingSupport.name); // "chai" — chain se inherited
 
-// Set TASupport to inherit from TeachingSupport
+// TASupport ko TeachingSupport se inherit karao
 Object.setPrototypeOf(TASupport, TeachingSupport);
 console.log("TASupport.name:", TASupport.name);             // "chai" — 3 levels deep!
-console.log("TASupport.makeVideo:", TASupport.makeVideo);   // true — from Teacher
+console.log("TASupport.makeVideo:", TASupport.makeVideo);   // true — Teacher se
 
-// ❌ Old way — DEPRECATED (still works but avoid):
+// Purana tarika — DEPRECATED (kaam karta hai par avoid karo):
 // TASupport.__proto__ = TeachingSupport;
 
-// ✅ Read the prototype:
+// Prototype read karo:
 console.log("\nPrototype of Teacher:", Object.getPrototypeOf(Teacher) === User); // true
 
-// ─────────────────────────────────────────────
-// 🔹 Adding Methods to String.prototype
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// String.prototype me Methods Add Karna
+// -----------------------------------------
 
 String.prototype.trueLength = function () {
     console.log(`"${this}"`);
@@ -94,13 +94,12 @@ console.log("\n--- Custom String Method ---");
 "iceTea".trueLength();             // True length: 6
 
 /*
- 🧠 Prototype Chain:
- ─────────────────────────────────
- TASupport → TeachingSupport → Teacher → User → Object.prototype → null
+ Prototype Chain:
+ TASupport -> TeachingSupport -> Teacher -> User -> Object.prototype -> null
 
- 🧠 Best Practices:
- ✅ Use Object.setPrototypeOf() / Object.getPrototypeOf()
- ❌ Avoid __proto__ — deprecated and slower
- ✅ In modern code, prefer ES6 classes with extends for inheritance
- ⚠️ Never modify built-in prototypes in production code (only for learning!)
+ Best Practices:
+ - Object.setPrototypeOf() / Object.getPrototypeOf() use karo
+ - __proto__ avoid karo — deprecated hai aur slow hai
+ - Modern code me ES6 classes + extends inheritance ke liye prefer karo
+ - Production code me built-in prototypes kabhi modify mat karo (sirf learning ke liye!)
 */

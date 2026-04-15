@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DOM — Add, Edit & Remove Elements</title>
+    <title>DOM — Add, Edit aur Remove Elements</title>
 </head>
 <body style="background-color: #212121; color: #fff; font-family: system-ui, sans-serif; padding: 20px;">
     <ul class="language">
@@ -12,17 +12,17 @@
 </body>
 <script>
     // ============================================
-    // 📌 DOM: Add, Edit & Remove Elements — Modern JS
+    // DOM: Add, Edit aur Remove Elements — Modern JS
     // ============================================
 
-    // ─────────────────────────────────────────────
-    // 🔹 Adding Elements
-    // ─────────────────────────────────────────────
+    // -----------------------------------------
+    // Elements Add Karna
+    // -----------------------------------------
 
-    // ✅ Modern approach: textContent instead of innerHTML (safer)
+    // Modern approach: innerHTML ki jagah textContent use karo (safer hai)
     const addLanguage = (langName) => {
         const li = document.createElement('li');
-        li.textContent = langName;  // ✅ Safe — no XSS risk
+        li.textContent = langName;  // Safe — XSS risk nahi
         document.querySelector('.language').appendChild(li);
     };
 
@@ -30,37 +30,37 @@
     addLanguage("TypeScript");
     addLanguage("Golang");
 
-    // ─────────────────────────────────────────────
-    // 🔹 Editing Elements
-    // ─────────────────────────────────────────────
+    // -----------------------------------------
+    // Elements Edit Karna
+    // -----------------------------------------
 
-    // Method 1: replaceWith() — replace entire element
+    // Method 1: replaceWith() — poora element replace karo
     const secondLang = document.querySelector("li:nth-child(2)");
     console.log("Replacing:", secondLang.textContent);
 
     const newLi = document.createElement('li');
     newLi.textContent = "Mojo";
-    secondLang.replaceWith(newLi); // ✅ Clean modern API
+    secondLang.replaceWith(newLi); // Clean modern API
 
-    // Method 2: outerHTML — replaces element's entire HTML
+    // Method 2: outerHTML — element ka poora HTML replace karo
     const firstLang = document.querySelector("li:first-child");
     firstLang.outerHTML = '<li>Rust</li>';
 
-    // ─────────────────────────────────────────────
-    // 🔹 Removing Elements
-    // ─────────────────────────────────────────────
+    // -----------------------------------------
+    // Elements Remove Karna
+    // -----------------------------------------
 
-    // ✅ Modern: element.remove() — clean and simple
+    // Modern: element.remove() — clean aur simple
     const lastLang = document.querySelector('li:last-child');
     console.log("Removing:", lastLang.textContent);
     lastLang.remove();
 
-    // ❌ Old way: parentNode.removeChild(element)
+    // Purana tarika: parentNode.removeChild(element)
     // element.parentNode.removeChild(element);
 
-    // ─────────────────────────────────────────────
-    // 🔹 Log Final List
-    // ─────────────────────────────────────────────
+    // -----------------------------------------
+    // Final List Log Karo
+    // -----------------------------------------
 
     const finalList = document.querySelectorAll('.language li');
     console.log("\nFinal language list:");

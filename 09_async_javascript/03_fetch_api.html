@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,30 +10,30 @@
     <div id="output" style="font-family: monospace; margin-top: 20px;"></div>
 
     <!-- XHR Ready State Reference:
-    0  UNSENT           Client created, open() not called
-    1  OPENED           open() has been called
-    2  HEADERS_RECEIVED send() called, headers available
-    3  LOADING          Downloading, partial data available
+    0  UNSENT           Client bana, open() call nahi hua
+    1  OPENED           open() call ho gaya
+    2  HEADERS_RECEIVED send() call hua, headers available
+    3  LOADING          Download ho raha hai, partial data available
     4  DONE             Operation complete
     -->
 </body>
 <script>
     // ============================================
-    // 📌 API Requests — Modern JS (fetch + async/await)
+    // API Requests — Modern JS (fetch + async/await)
     // ============================================
 
     const output = document.querySelector('#output');
     const API_URL = 'https://api.github.com/users/deepakchoudhary';
 
-    // ─────────────────────────────────────────────
-    // 🔹 ✅ Modern Way: fetch + async/await
-    // ─────────────────────────────────────────────
+    // -----------------------------------------
+    // Modern Way: fetch + async/await
+    // -----------------------------------------
 
     const fetchGitHubUser = async (url) => {
         try {
             const response = await fetch(url);
 
-            // ✅ Always check if response is ok (status 200-299)
+            // Hamesha check karo ki response ok hai (status 200-299)
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
@@ -44,7 +44,7 @@
             console.log("Followers:", data.followers);
             console.log("Public repos:", data.public_repos);
 
-            // Display on page
+            // Page pe display karo
             output.innerHTML = `
                 <p><strong>Name:</strong> ${data.name}</p>
                 <p><strong>Bio:</strong> ${data.bio}</p>
@@ -53,16 +53,16 @@
                 <p><strong>Profile:</strong> <a href="${data.html_url}" style="color: #64b5f6;">${data.html_url}</a></p>
             `;
         } catch (error) {
-            console.error("Fetch failed:", error.message);
+            console.error("Fetch fail hua:", error.message);
             output.textContent = `Error: ${error.message}`;
         }
     };
 
     fetchGitHubUser(API_URL);
 
-    // ─────────────────────────────────────────────
-    // 🔹 Fetch with AbortController (Cancel Requests)
-    // ─────────────────────────────────────────────
+    // -----------------------------------------
+    // Fetch with AbortController (Requests Cancel Karo)
+    // -----------------------------------------
 
     // const controller = new AbortController();
     // const timeoutId = setTimeout(() => controller.abort(), 5000); // 5s timeout
@@ -73,13 +73,13 @@
     //     const data = await response.json();
     // } catch (error) {
     //     if (error.name === 'AbortError') {
-    //         console.log('Request was aborted (timeout)');
+    //         console.log('Request abort ho gaya (timeout)');
     //     }
     // }
 
-    // ─────────────────────────────────────────────
-    // ❌ Old Way: XMLHttpRequest (avoid in modern code)
-    // ─────────────────────────────────────────────
+    // -----------------------------------------
+    // Purana Tarika: XMLHttpRequest (modern code me avoid karo)
+    // -----------------------------------------
 
     // const xhr = new XMLHttpRequest();
     // xhr.open('GET', API_URL);
@@ -92,13 +92,12 @@
     // xhr.send();
 
     /*
-     🧠 fetch() vs XMLHttpRequest:
-     ─────────────────────────────────
-     ✅ fetch() — Promise-based, cleaner syntax, supports async/await
-     ✅ fetch() — Built-in AbortController for cancellation
-     ✅ fetch() — Better error handling with response.ok
-     ❌ XMLHttpRequest — callback-based, verbose, outdated
-     ❌ XMLHttpRequest — No native Promise support
+     fetch() vs XMLHttpRequest:
+     fetch() — Promise-based, clean syntax, async/await support
+     fetch() — Built-in AbortController se cancellation
+     fetch() — response.ok se better error handling
+     XMLHttpRequest — callback-based, verbose, outdated
+     XMLHttpRequest — Native Promise support nahi hai
     */
 </script>
 </html>

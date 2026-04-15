@@ -1,54 +1,53 @@
-﻿// ============================================
-// 📌 Scopes in Modern JavaScript (ES2024+)
+// ============================================
+// Scopes in Modern JavaScript (ES2024+)
 // ============================================
 
-// ─────────────────────────────────────────────
-// 🔹 Block Scope (let & const)
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// Block Scope (let aur const)
+// -----------------------------------------
 
 let a = 300;
 
 if (true) {
-    let a = 10;     // This 'a' is scoped to this block only
-    const b = 20;   // This 'b' is scoped to this block only
+    let a = 10;     // Yeh 'a' sirf is block me hai
+    const b = 20;   // Yeh 'b' sirf is block me hai
     console.log("INNER a:", a);  // 10
     console.log("INNER b:", b);  // 20
 }
 
-console.log("OUTER a:", a);  // 300 — outer 'a' is unchanged
-// console.log(b);           // ❌ ReferenceError — b is not defined outside the block
+console.log("OUTER a:", a);  // 300 — bahar wala 'a' change nahi hua
+// console.log(b);           // ReferenceError — b block ke bahar defined nahi hai
 
 /*
- 🧠 Scope Types:
- ────────────────────────────────────────────
- 1. Block Scope  → let, const (inside { })
- 2. Function Scope → var (inside function)
- 3. Global Scope → declared outside any block/function
- 4. Module Scope → top-level in ES Modules (each file is its own module)
+ Scope Types:
+ 1. Block Scope  -> let, const ({ } ke andar)
+ 2. Function Scope -> var (function ke andar)
+ 3. Global Scope -> kisi bhi block/function ke bahar declared
+ 4. Module Scope -> ES Modules me top-level (har file apna module hai)
 */
 
-// ─────────────────────────────────────────────
-// 🔹 Nested Function Scopes (Closure)
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// Nested Function Scopes (Closure)
+// -----------------------------------------
 
 function one() {
     const username = "DEEPAK";
 
     function two() {
         const website = "youtube";
-        console.log("\nInner can access outer:", username); // ✅ Works — closure!
+        console.log("\nInner bahar wala access kar sakta hai:", username); // Closure!
     }
 
-    // console.log(website); // ❌ ReferenceError — can't access inner scope
+    // console.log(website); // ReferenceError — inner scope access nahi kar sakte
 
     two();
 }
 
 one();
 
-// ─────────────────────────────────────────────
-// 🔹 Nested Block Scopes
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// Nested Block Scopes
+// -----------------------------------------
 
 if (true) {
     const username = "DEEPAK";
@@ -56,40 +55,39 @@ if (true) {
         const website = "youtube";
         console.log("\nNested block:", username + website); // "DEEPAKyoutube"
     }
-    // console.log(website); // ❌ ReferenceError
+    // console.log(website); // ReferenceError
 }
 
-// console.log(username); // ❌ ReferenceError
+// console.log(username); // ReferenceError
 
-// ─────────────────────────────────────────────
-// 🔹 Hoisting — Function Declarations vs Expressions
-// ─────────────────────────────────────────────
+// -----------------------------------------
+// Hoisting — Function Declarations vs Expressions
+// -----------------------------------------
 
 console.log("\n--- Hoisting ---");
 
-// ✅ Function declarations ARE hoisted — you can call them before they're defined
-console.log("addOne(5):", addOne(5)); // 6 — Works!
+// Function declarations HOISTED hoti hain — define hone se pehle call kar sakte ho
+console.log("addOne(5):", addOne(5)); // 6 — kaam karega!
 
 function addOne(num) {
     return num + 1;
 }
 
-// ❌ Function expressions are NOT hoisted — calling before definition throws an error
-// console.log(addTwo(5)); // ❌ ReferenceError: Cannot access 'addTwo' before initialization
+// Function expressions HOISTED nahi hoti — define hone se pehle call karne pe error
+// console.log(addTwo(5)); // ReferenceError: Cannot access 'addTwo' before initialization
 
 const addTwo = function (num) {
     return num + 2;
 };
 
-console.log("addTwo(5):", addTwo(5)); // 7 — Works after definition
+console.log("addTwo(5):", addTwo(5)); // 7 — define hone ke baad kaam karega
 
 /*
- 🧠 Temporal Dead Zone (TDZ):
- ─────────────────────────────────
- Variables declared with let/const exist in a "dead zone" from the start
- of their scope until their declaration is reached. Accessing them in the
- TDZ throws a ReferenceError. This is why you can't use addTwo before it's defined.
+ Temporal Dead Zone (TDZ):
+ let/const se declared variables apne scope ki shuruat se lekar declaration
+ tak ek "dead zone" me rehte hain. TDZ me access karne pe ReferenceError aata hai.
+ Isliye addTwo ko define hone se pehle use nahi kar sakte.
 
- var has no TDZ — it's hoisted and initialized to undefined (which causes subtle bugs).
- That's another reason to NEVER use var.
+ var me koi TDZ nahi hota — hoist hoke undefined ho jaata hai (subtle bugs ka reason).
+ Isliye var kabhi mat use karo.
 */

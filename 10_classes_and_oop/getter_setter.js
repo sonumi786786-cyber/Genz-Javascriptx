@@ -1,9 +1,9 @@
-﻿// ============================================
-// 📌 Getter & Setter — Class Syntax (ES2024+)
+// ============================================
+// Getter aur Setter — Class Syntax (ES2024+)
 // ============================================
 
 class User {
-    // ✅ Private fields (ES2022) — truly encapsulated
+    // Private fields (ES2022) — sach me encapsulated
     #email;
     #password;
 
@@ -12,28 +12,28 @@ class User {
         this.#password = password;
     }
 
-    // ✅ Getter — access like a property: user.email
+    // Getter — property ki tarah access karo: user.email
     get email() {
         return this.#email.toUpperCase();
     }
 
-    // ✅ Setter — assign like a property: user.email = "new@email.com"
+    // Setter — property ki tarah assign karo: user.email = "new@email.com"
     set email(value) {
         if (!value.includes("@")) {
-            console.warn("Invalid email — must contain @");
+            console.warn("Invalid email — @ hona chahiye");
             return;
         }
         this.#email = value;
     }
 
     get password() {
-        // ✅ Never expose real password — mask it
+        // Asli password kabhi expose mat karo — mask karo
         return "*".repeat(this.#password.length);
     }
 
     set password(value) {
         if (value.length < 6) {
-            console.warn("Password too short — minimum 6 characters");
+            console.warn("Password chota hai — minimum 6 characters chahiye");
             return;
         }
         this.#password = value;
@@ -43,26 +43,25 @@ class User {
 const DEEPAK = new User("h@DEEPAK.ai", "abc123");
 
 console.log("--- Getters ---");
-console.log("Email:", DEEPAK.email);       // "H@DEEPAK.AI" — getter transforms
-console.log("Password:", DEEPAK.password); // "******" — getter masks
+console.log("Email:", DEEPAK.email);       // "H@DEEPAK.AI" — getter transform karta hai
+console.log("Password:", DEEPAK.password); // "******" — getter mask karta hai
 
 console.log("\n--- Setters with Validation ---");
-DEEPAK.email = "new@email.com";           // ✅ Valid
+DEEPAK.email = "new@email.com";           // Valid
 console.log("New email:", DEEPAK.email);   // "NEW@EMAIL.COM"
 
-DEEPAK.email = "invalid";                  // ⚠️ Warns: "Invalid email"
-console.log("Still:", DEEPAK.email);        // "NEW@EMAIL.COM" — unchanged
+DEEPAK.email = "invalid";                  // Warn: "Invalid email"
+console.log("Still:", DEEPAK.email);        // "NEW@EMAIL.COM" — change nahi hua
 
-DEEPAK.password = "ab";                    // ⚠️ Warns: "Password too short"
-DEEPAK.password = "newSecure123";          // ✅ Valid
+DEEPAK.password = "ab";                    // Warn: "Password chota hai"
+DEEPAK.password = "newSecure123";          // Valid
 console.log("Password:", DEEPAK.password); // "************"
 
 /*
- 🧠 Getters & Setters:
- ─────────────────────────────────
- ✅ Access like properties (no parentheses needed)
- ✅ Add validation in setters
- ✅ Transform data in getters
- ✅ Combine with #private fields for true encapsulation
- ✅ Great for computed properties
+ Getters aur Setters:
+ - Properties ki tarah access karo (parentheses ki zarurat nahi)
+ - Setters me validation add karo
+ - Getters me data transform karo
+ - #private fields ke saath combine karo true encapsulation ke liye
+ - Computed properties ke liye bhi useful hain
 */
